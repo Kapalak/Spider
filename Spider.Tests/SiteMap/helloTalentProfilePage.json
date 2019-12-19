@@ -1,0 +1,13 @@
+﻿{
+  "Name": "Hello Talent Profile Page",
+  "Description": "The profile page",
+  "Selectors": [
+    {
+      "Key": "UserMenuItemText",
+      "Name": "User Name Menu Text Item",
+      "Type": "XPATH",
+      "Description": "Display the user name",
+      "Text": "//div[@class='user-menu-name']/span | //div[@class='header-account-names']/span"
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29409.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spider.Common", "Spider.Common\Spider.Common.csproj", "{6BBCF882-3E09-43BA-B32A-38EF99519ACE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spider.SeleniumClient", "Spider.SeleniumClient\Spider.SeleniumClient.csproj", "{9F00340D-AAE7-460A-9D66-4DAF8BF03660}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spider.SiteMapManager", "Spider.SiteMapManager\Spider.SiteMapManager.csproj", "{D957FB76-0A2D-4076-AF5B-BCCBEFEDF9DF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spider.TestbookManager", "Spider.TestbookManager\Spider.TestbookManager.csproj", "{3912FCF8-24FD-43D3-BC3A-F896D580343B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spider.Tests", "Spider.Tests\Spider.Tests.csproj", "{62A40771-2F9A-4C13-A6B6-C8090A49A1DC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spider-cli", "Spider-cli\Spider-cli.csproj", "{F8ECB128-5E01-4907-89FE-A6FFB1CD9C2E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6BBCF882-3E09-43BA-B32A-38EF99519ACE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BBCF882-3E09-43BA-B32A-38EF99519ACE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BBCF882-3E09-43BA-B32A-38EF99519ACE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BBCF882-3E09-43BA-B32A-38EF99519ACE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F00340D-AAE7-460A-9D66-4DAF8BF03660}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F00340D-AAE7-460A-9D66-4DAF8BF03660}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F00340D-AAE7-460A-9D66-4DAF8BF03660}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F00340D-AAE7-460A-9D66-4DAF8BF03660}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D957FB76-0A2D-4076-AF5B-BCCBEFEDF9DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D957FB76-0A2D-4076-AF5B-BCCBEFEDF9DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D957FB76-0A2D-4076-AF5B-BCCBEFEDF9DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D957FB76-0A2D-4076-AF5B-BCCBEFEDF9DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3912FCF8-24FD-43D3-BC3A-F896D580343B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3912FCF8-24FD-43D3-BC3A-F896D580343B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3912FCF8-24FD-43D3-BC3A-F896D580343B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3912FCF8-24FD-43D3-BC3A-F896D580343B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62A40771-2F9A-4C13-A6B6-C8090A49A1DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62A40771-2F9A-4C13-A6B6-C8090A49A1DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62A40771-2F9A-4C13-A6B6-C8090A49A1DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62A40771-2F9A-4C13-A6B6-C8090A49A1DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8ECB128-5E01-4907-89FE-A6FFB1CD9C2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8ECB128-5E01-4907-89FE-A6FFB1CD9C2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8ECB128-5E01-4907-89FE-A6FFB1CD9C2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8ECB128-5E01-4907-89FE-A6FFB1CD9C2E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {901CFAFE-A452-4C57-BA5B-0A0F161D8CF5}
+	EndGlobalSection
+EndGlobal

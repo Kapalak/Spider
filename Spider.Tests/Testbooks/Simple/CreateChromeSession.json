@@ -1,0 +1,15 @@
+﻿{
+  "Name": "CreateChromeSession",
+  "Description": "This Test create a chrome session",
+  "Steps": [
+    {
+      "Name": "CREATE_SESSION",
+      "Description": "This step open the browser"
+    },
+    {
+      "Name": "NAVIGATE_URL",
+      "Param": "http://www.google.com",
+      "Description": "This step open the browser"
+    }
+  ]
+}

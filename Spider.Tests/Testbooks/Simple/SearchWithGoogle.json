@@ -1,0 +1,34 @@
+﻿{
+  "Name": "FirstGoogleSearchTest",
+  "Description": "This Test ...",
+  "Steps": [
+    {
+      "Name": "CREATE_SESSION",
+      "Description": "This step open the browser",
+      "TakeScreenshotBefore": true,
+      "TakeScreenshotAfter": true
+    },
+    {
+      "Name": "NAVIGATE_URL",
+      "Param": "#google.Url",
+      "Description": "This step open the browser",
+      "TakeScreenshotBefore": true,
+      "TakeScreenshotAfter": true
+    },
+    {
+      "Name": "SET_TEXT",
+      "Param": "#google.SearchInput",
+      "Value": "Talentsoft",
+      "Description": "Write Talentsoft on the search input",
+      "TakeScreenshotBefore": true,
+      "TakeScreenshotAfter": true
+    },
+    {
+      "Name": "CLICK_BUTTON",
+      "Param": "#google.SearchButton",
+      "Description": "This step open the browser",
+      "TakeScreenshotBefore": true,
+      "TakeScreenshotAfter": true
+    }
+  ]
+}

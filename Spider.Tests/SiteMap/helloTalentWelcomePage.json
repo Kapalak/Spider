@@ -1,0 +1,21 @@
+﻿{
+  "Name": "Hello Talent first Page",
+  "Description": "This is the Hello Talent first page",
+  "Url": "https://www.hellotalent.com/",
+  "Selectors": [
+    {
+      "Key": "LoginMenuItem",
+      "Name": "Login button",
+      "Type": "XPATH",
+      "Description": "By cliking on this we navigate to the login page.",
+      "Text": "//li[contains(@class,'login')]"
+    },
+    {
+      "Key": "HelloTalentLogo",
+      "Name": "Hello Talent Logo",
+      "Type": "XPATH",
+      "Description": "Click on the hello talent logo",
+      "Text": "//*[contains(@class,'main-logo')]"
+    }
+  ]
+}

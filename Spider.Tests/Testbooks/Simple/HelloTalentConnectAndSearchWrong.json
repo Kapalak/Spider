@@ -1,0 +1,22 @@
+﻿{
+  "Name": "WrongTest",
+  "Description": "This Test a wrong test",
+  "Steps": [
+    {
+      "Name": "EXECUTE_SCENARIO",
+      "Param": "HelloTalentSignInScenario",
+      "value": "WrongHelloTalentAymenContext",
+      "Description": "Execute Sign-in Scenario",
+      "TakeScreenshotBefore": true,
+      "TakeScreenshotAfter": true
+    },
+    {
+      "Name": "ASSERT_TEXT",
+      "Param": "#helloTalentProfilePage.UserMenuItemText",
+      "value": "Ben Miled",
+      "Description": "assert that the text exist and equal to the passed value",
+      "TakeScreenshotBefore": true,
+      "TakeScreenshotAfter": true
+    }
+  ]
+}

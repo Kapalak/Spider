@@ -1,0 +1,21 @@
+﻿{
+  "Name": "Google Page",
+  "Description": "This is the google search page",
+  "Url": "http://www.google.com",
+  "Selectors": [
+    {
+      "Key": "SearchButton",
+      "Name": "Rechercher button",
+      "Type": "XPATH",
+      "Description": "By cliking on this button we get search result.",
+      "Text": "//input[@value='Recherche Google'] | //input[(@name='btnK')] "
+    },
+    {
+      "Key": "SearchInput",
+      "Name": "Rechercher input",
+      "Type": "XPATH",
+      "Description": "set a text in this input",
+      "Text": "//input[@title='Rechercher'] | //input[@name='q']"
+    }    
+  ]
+}

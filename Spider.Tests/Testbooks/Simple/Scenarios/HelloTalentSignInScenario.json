@@ -1,0 +1,65 @@
+﻿{
+  "Name": "My First Test in Hello Talent",
+  "Code": "HT_0010",
+  "Description": "This Test ...",
+  "Steps": [
+    {
+      "Name": "CREATE_SESSION",
+      "Description": "This step open the browser",
+      "TakeScreenshotBefore": true,
+      "TakeScreenshotAfter": true
+    },
+    {
+      "Name": "NAVIGATE_URL",
+      "Param": "#helloTalentWelcomePage.Url",
+      "Description": "Navigate to",
+      "TakeScreenshotBefore": true,
+      "TakeScreenshotAfter": true
+    },
+    {
+      "Name": "CLICK_BUTTON",
+      "Param": "#helloTalentWelcomePage.HelloTalentLogo",
+      "Description": "Click on the logo",
+      "TakeScreenshotBefore": true,
+      "TakeScreenshotAfter": true
+    },
+    {
+      "Name": "CLICK_BUTTON",
+      "Param": "#helloTalentWelcomePage.LoginMenuItem",
+      "Description": "Navigate to the login page",
+      "TakeScreenshotBefore": true,
+      "TakeScreenshotAfter": true
+    },
+    {
+      "Name": "SET_TEXT",
+      "Param": "#helloTalentLoginPage.EmailInput",
+      "Description": "Set the user email",
+      "Value": "$Login",
+      "TakeScreenshotBefore": true,
+      "TakeScreenshotAfter": true
+    },
+    {
+      "Name": "SET_TEXT",
+      "Param": "#helloTalentLoginPage.PasswordInput",
+      "Description": "Set the password",
+      "Value": "$Password",
+      "TakeScreenshotBefore": true,
+      "TakeScreenshotAfter": true
+    },
+    {
+      "Name": "CLICK_BUTTON",
+      "Param": "#helloTalentLoginPage.ConnectLogin",
+      "Description": "Click on connect button",
+      "TakeScreenshotBefore": true,
+      "TakeScreenshotAfter": true
+    },
+    {
+      "Name": "ASSERT_TEXT",
+      "Param": "#helloTalentProfilePage.UserMenuItemText",
+      "value": "Ben Miled",
+      "Description": "assert that the text exist and equal to the passed value",
+      "TakeScreenshotBefore": true,
+      "TakeScreenshotAfter": true
+    }
+  ]
+}

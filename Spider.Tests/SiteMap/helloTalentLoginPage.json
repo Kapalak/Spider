@@ -1,0 +1,27 @@
+﻿{
+  "Name": "Hello Talent login Page",
+  "Description": "This is the Hello Talent login page",
+  "Selectors": [
+    {
+      "Key": "EmailInput",
+      "Name": "Email input",
+      "Type": "XPATH",
+      "Description": "input to set email for authentification.",
+      "Text": "//input[@id='Email']"
+    },
+    {
+      "Key": "PasswordInput",
+      "Name": "Password button",
+      "Type": "XPATH",
+      "Description": "input to set password for authentification..",
+      "Text": "//input[@id='Password']"
+    },
+    {
+      "Key": "ConnectLogin",
+      "Name": "Connect button",
+      "Type": "XPATH",
+      "Description": "Click to connect",
+      "Text": "//button[text()='CONNECTEZ-VOUS À HELLO TALENT'] | //button[text()='CONNECT TO HELLO TALENT NOW']"
+    }
+  ]
+}

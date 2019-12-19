@@ -1,0 +1,78 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="SiteMap\google.json" />
+    <None Remove="SiteMap\helloTalentLoginPage.json" />
+    <None Remove="SiteMap\helloTalentProfilePage.json" />
+    <None Remove="SiteMap\helloTalentWelcomePage.json" />
+    <None Remove="Testbooks\Simple\CreateChromeSession.json" />
+    <None Remove="Testbooks\Simple\HelloTalentConnectAndSearch.json" />
+    <None Remove="Testbooks\Simple\HelloTalentConnectAndSearchWrong.json" />
+    <None Remove="Testbooks\Simple\HelloTalentSignIn.json" />
+    <None Remove="Testbooks\Simple\Scenarios\HelloTalentSignInScenario.json" />
+    <None Remove="Testbooks\Simple\SearchWithGoogle.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="SiteMap\google.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteMap\helloTalentLoginPage.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteMap\helloTalentProfilePage.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SiteMap\helloTalentWelcomePage.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Testbooks\Simple\CreateChromeSession.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Testbooks\Simple\HelloTalentConnectAndSearch.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Testbooks\Simple\HelloTalentConnectAndSearchWrong.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Testbooks\Simple\HelloTalentSignIn.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Testbooks\Simple\Scenarios\HelloTalentSignInScenario.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Testbooks\Simple\SearchWithGoogle.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="nunit" Version="3.12.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.13.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Testbooks\Simple\Contexts\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Spider.SeleniumClient\Spider.SeleniumClient.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Testbooks\Simple\Contexts\HelloTalentAymenContext.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Testbooks\Simple\Contexts\WrongHelloTalentAymenContext.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
