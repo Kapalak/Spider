@@ -76,7 +76,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Copy SourceFiles="App.config" DestinationFolder="$(OutDir)\testhost.dll.confi" />
+    <Copy SourceFiles="App.config" DestinationFiles="$(OutDir)\testhost.dll.config" />
   </Target>
 
 </Project>
