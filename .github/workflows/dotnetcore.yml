@@ -18,4 +18,5 @@ jobs:
     - name: run unit test with dotnet
       run: dotnet test --filter "Category=UNIT-TEST"
     - name: Create single executable file
-      run: ls
+      run: dotnet publish Spider-cli -r win-x64 -c Release /p:PublishSingleFile=true
+ 
