@@ -15,5 +15,5 @@ jobs:
         dotnet-version: 3.0.100
     - name: Build with dotnet
       run: dotnet build --configuration Release    
-      - name: run unit test with dotnet
+    - name: run unit test with dotnet
       run: dotnet test --filter "Category=UNIT-TEST"
