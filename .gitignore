@@ -2,3 +2,5 @@
 /**/bin/Debug/*
 **/obj/**
 */bin/*
+/Spider-cli/chrome/chromedriver.exe
+/Spider-cli/chromedriver_*.zip
