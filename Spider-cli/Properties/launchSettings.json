@@ -2,7 +2,7 @@
   "profiles": {
     "Spider-cli": {
       "commandName": "Project",
-      "commandLineArgs": "-t c:\\spider\\Testbooks\\Ecovadis\\BOFirstTest.json -p All -o c:\\spider\\results -s c:\\spider\\Testbooks\\Ecovadis -c c:\\spider\\Testbooks\\Ecovadis\\Contexts -m c:\\spider\\SiteMap"
+      "commandLineArgs": "-t Sample\\SearchWithGoogleSimple.json -o  .\\results"
     }
   }
 }

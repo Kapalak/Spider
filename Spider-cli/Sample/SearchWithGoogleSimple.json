@@ -1,0 +1,87 @@
+{
+    "Name": "FirstGoogleSearchTest",
+    "Description": "This Test ...",
+    "Steps": [
+        {
+            "Name": "CREATE_SESSION",
+            "Type": 0,
+            "Description": "This step open the browser",
+            "Measure": {
+                "StartDate": "0001-01-01T00:00:00",
+                "EndDate": "0001-01-01T00:00:00"
+            }
+        },
+        {
+            "Name": "TAKE_SCREENSHOT",
+            "Type": 12,
+            "Description": "Screenshot after action CREATE_SESSION ",
+            "Value": "FirstGoogleSearchTest\\FirstGoogleSearchTest_0_1after.png",
+            "Measure": {
+                "StartDate": "0001-01-01T00:00:00",
+                "EndDate": "0001-01-01T00:00:00"
+            }
+        },
+        {
+            "Name": "NAVIGATE_URL",
+            "Type": 1,
+            "Description": "This step open the browser",
+            "Param": "http://www.google.com",
+            "Value": null,
+            "Page": null,
+            "Selector": null,
+            "SessionId": null,
+            "Measure": {
+                "StartDate": "0001-01-01T00:00:00",
+                "EndDate": "0001-01-01T00:00:00"
+            },
+            "Failed": false,
+            "StackTrace": null
+        },
+        {
+            "Name": "TAKE_SCREENSHOT",
+            "Type": 12,
+            "Description": "Screenshot before action NAVIGATE_URL #google.Url ",
+            "Value": "FirstGoogleSearchTest\\FirstGoogleSearchTest_2_0before.png",
+            "Measure": {
+                "StartDate": "0001-01-01T00:00:00",
+                "EndDate": "0001-01-01T00:00:00"
+            }
+        },
+        {
+            "Name": "SET_TEXT",
+            "Type": 3,
+            "Description": "Write Talentsoft on the search input",
+            "Value": "Talentsoft",
+            "Selector": {
+                "Key": "SearchInput",
+                "Name": "Rechercher input",
+                "Description": "set a text in this input",
+                "Type": "XPATH",
+                "SelectorType": 0,
+                "Text": "//input[@title='Rechercher'] | //input[@name='q']",
+                "Args": null
+            }
+        },
+        {
+            "Name": "TAKE_SCREENSHOT",
+            "Type": 12,
+            "Description": "Screenshot after action NAVIGATE_URL #google.Url",
+            "Value": "FirstGoogleSearchTest\\FirstGoogleSearchTest_2_1after.png",
+        },
+        {
+            "Name": "CLICK_BUTTON",
+            "Type": 2,
+            "Description": "This step open the browser",
+            "Selector": {
+                "Key": "SearchButton",
+                "Name": "Rechercher button",
+                "Description": "By cliking on this button we get search result.",
+                "Type": "XPATH",
+                "SelectorType": 0,
+                "Text": "//input[@value='Recherche Google'] | //input[(@name='btnK')] ",
+                "Args": null
+            }
+        }
+    ],
+    "FileName": "SearchWithGoogle.json"
+}
