@@ -145,29 +145,41 @@
                 {
                     var response = await client.GetAsync(SeleniumConfig.LastChromeDriverVersionUrl);
                     var chromeLastVersion = await response.Content.ReadAsStringAsync();
+
+                    var path = new FileInfo(Assembly.GetEntryAssembly().Location).Directory.ToString();
+                    //Directory.GetCurrentDirectory();
+                    Console.WriteLine($"Spider Workdirectory is : {path}");
+                    //Environment.CurrentDirectory;
+                    // Path.GetTempPath();
+
+                    Console.WriteLine($"The last chrome driver: chromeLastVersion / Source {SeleniumConfig.LastChromeDriverVersionUrl}");
                     var zipFile = $"chromedriver_{chromeLastVersion}_win32.zip";
 
+                    Console.WriteLine($"check if {Path.Combine(path, zipFile)} exist");
+                    Console.WriteLine($"check if {Path.Combine(path, "chrome", "chromedriver.exe")} exist");
                     if (
-                        !File.Exists(Path.Combine(zipFile)) &&
-                        !File.Exists(Path.Combine("chrome", "chromedriver.exe"))
+                        !File.Exists(Path.Combine(path, zipFile)) &&
+                        !File.Exists(Path.Combine(path, "chrome", "chromedriver.exe"))
                         )
                     {
                         using (var cli = new WebClient())
                         {
+                            Console.WriteLine($"Download chromdriver zip file from https://chromedriver.storage.googleapis.com/{chromeLastVersion}/chromedriver_win32.zip");
                             var bytes = await Task.Run(() => cli.DownloadData($"https://chromedriver.storage.googleapis.com/{chromeLastVersion}/chromedriver_win32.zip"));
 
-                            using (var stream = File.Create(zipFile))
+                            using (var stream = File.Create(Path.Combine(path, zipFile)))
                             {
                                 await stream.WriteAsync(bytes, 0, bytes.Length);
                             }
 
-                            FileInfo zipFileInfo = new FileInfo( zipFile);
+                            FileInfo zipFileInfo = new FileInfo(Path.Combine(path, zipFile));
                             var driverDirFullPath = Path.Combine(zipFileInfo.DirectoryName, SeleniumConfig.ChromeDriverLocation);
+                           
                             if (Directory.Exists(driverDirFullPath))
                             {
                                 Directory.Delete(driverDirFullPath, true);
                             }
-
+                            Console.WriteLine($"Unzipping ino {zipFileInfo.FullName}");
                             ZipFile.ExtractToDirectory(zipFileInfo.FullName, Path.Combine(zipFileInfo.DirectoryName, "chrome"), System.Text.Encoding.ASCII);
                         }
                     }
