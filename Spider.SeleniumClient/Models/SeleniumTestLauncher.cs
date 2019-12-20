@@ -133,10 +133,5 @@ namespace Spider.SeleniumClient
             TestBookHelper.SaveTestToJson(test, outputFile);
             return test;
         }
-
-        public static void ExecuteSampleTest()
-        {
-            
-        }
     }
 }
