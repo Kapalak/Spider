@@ -18,7 +18,7 @@ jobs:
     - name: run unit test with dotnet
       run: dotnet test --filter "Category=UNIT-TEST"
     - name: Create single executable file
-      run: dotnet publish -r win-x64 -c Release /p:PublishSingleFile=true
+      run: cd spider-cli && dotnet publish -r win-x64 -c Release /p:PublishSingleFile=true
     - name: Upload artifact
       uses: actions/upload-artifact@v1.0.0
       with:
