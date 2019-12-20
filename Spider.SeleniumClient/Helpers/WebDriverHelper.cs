@@ -148,8 +148,8 @@
                     var zipFile = $"chromedriver_{chromeLastVersion}_win32.zip";
 
                     if (
-                        !File.Exists(Path.Combine(SeleniumConfig.ChromeDriverLocation, zipFile)) ||
-                        !File.Exists(Path.Combine(SeleniumConfig.ChromeDriverLocation, "chrome", "chromedriver.exe"))
+                        !File.Exists(Path.Combine(zipFile)) &&
+                        !File.Exists(Path.Combine("chrome", "chromedriver.exe"))
                         )
                     {
                         using (var cli = new WebClient())
