@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
@@ -76,7 +76,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="copy /Y &quot;App.config&quot; &quot;$(OutDir)\testhost.dll.config&quot;" />
+    <Copy SourceFiles="App.config" DestinationFolder="$(OutDir)\testhost.dll.confi" />
   </Target>
 
 </Project>
