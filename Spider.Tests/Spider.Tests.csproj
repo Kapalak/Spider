@@ -64,6 +64,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Spider.SeleniumClient\Spider.SeleniumClient.csproj" />
+    <ProjectReference Include="..\Spider.Steps\Spider.Steps.csproj" />
   </ItemGroup>
 
   <ItemGroup>
