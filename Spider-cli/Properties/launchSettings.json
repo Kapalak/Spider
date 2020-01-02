@@ -2,7 +2,7 @@
   "profiles": {
     "Spider-cli": {
       "commandName": "Project",
-      "commandLineArgs": "-t Sample\\SearchWithGoogleSimple.json -o  .\\results"
+      "commandLineArgs": "-t Sample\\SearchWithGoogleSimple.json -o  .\\results --browser-type firefox"
     }
   }
 }

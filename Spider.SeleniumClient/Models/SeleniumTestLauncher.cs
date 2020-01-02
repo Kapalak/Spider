@@ -10,6 +10,7 @@ namespace Spider.SeleniumClient
     using Spider.Common.Helper;
     using Spider.Common.Model;
     using Spider.TestbookManager.Helper;
+    using System.Threading.Tasks;
 
     public static class SeleniumTestLauncher
     {
@@ -22,7 +23,7 @@ namespace Spider.SeleniumClient
             return jsonTest;
         }
 
-        public static string Execute(this Test test, string outputDirectoryLocation)
+        public static async Task<string> ExecuteAsync(this Test test, ExecutionEnvironment executionEnvironment)
         {
             test.Measure.StartDate = DateTime.Now;
             string sessionId = string.Empty;
@@ -34,8 +35,13 @@ namespace Spider.SeleniumClient
                     if (!string.IsNullOrEmpty(sessionId))
                     {
                         step.SessionId = sessionId;
+                    } 
+                    else
+                    {
+                        await WebDriverHelper.EnsureDriverAsync(executionEnvironment);
                     }
-                    step.Execute(ref testWebDriver, outputDirectoryLocation);
+
+                    step.Execute(ref testWebDriver, executionEnvironment);
                     if (sessionId != step.SessionId)
                     {
                         sessionId = step.SessionId;
@@ -60,7 +66,7 @@ namespace Spider.SeleniumClient
             return sessionId;
         }
 
-        public static void Execute(this Step step, ref IWebDriver webDriver, string outputDirectory)
+        public static void Execute(this Step step, ref IWebDriver webDriver, ExecutionEnvironment executionEnvironment)
         {
             try
             {
@@ -68,7 +74,7 @@ namespace Spider.SeleniumClient
                 switch (step.Type)
                 {
                     case (StepType.CREATE_SESSION):
-                        webDriver = WebDriverHelper.CreateSession();
+                        webDriver = WebDriverHelper.CreateSession(executionEnvironment.BrowserType);
                         var sessionId = ((OpenQA.Selenium.Remote.RemoteWebDriver)webDriver).SessionId;
                         webDriver.ResizeWindow(SeleniumConfig.BrowserSize);
                         step.SessionId = sessionId.ToString();
@@ -87,7 +93,7 @@ namespace Spider.SeleniumClient
                         webDriver.AssertTextEqual(step.Selector, step.Value);
                         break;
                     case (StepType.TAKE_SCREENSHOT):
-                        webDriver.TakeScreenshot(step.Value, Path.Combine(outputDirectory));
+                        webDriver.TakeScreenshot(step.Value, Path.Combine(executionEnvironment.OutputDirectoryLocation));
                         break;
                     case (StepType.RESIZE_WINDOW):
                         webDriver.ResizeWindow(SeleniumConfig.BrowserSize);
@@ -113,22 +119,18 @@ namespace Spider.SeleniumClient
                 step.StackTrace = ex.Message;
                 throw ex;
             }
-            //if (step.Selector == null) CLICK_BUTTON/ SET_TEXT
-            //{
-            //    throw new InvalidSelectorException($"No valid selector for the step {step.Name}");
-            //}
         }
 
-        public static ITest ExecuteTestFromJson(string jsonFile, ExecutionEnvironment execEnv)
+        public static async Task<ITest> ExecuteTestFromJsonAsync(string jsonFile, ExecutionEnvironment execEnv)
         {
             var test = TestBookHelper.ReadTestFromJson(jsonFile);
             test.ConvertScenarioToElementarySteps(execEnv);
             test.InsertScreenshotSteps();
             test.ConvertFromPageObject(execEnv);
             //to use on debug mode only
-            TestBookHelper.SaveTestToJson(test, $"{test.FilePath.Replace(".json", "-conv.json")}");
-            var sessionId = test.Execute(execEnv.OutputDirectoryLocation);
-            TestBookHelper.SaveTestToJson(test, $"{test.FilePath.Replace(".json", "-result.json")}");
+            //TestBookHelper.SaveTestToJson(test, $"{test.FilePath.Replace(".json", "-conv.json")}");
+            var sessionId = await test.ExecuteAsync(execEnv);
+            //TestBookHelper.SaveTestToJson(test, $"{test.FilePath.Replace(".json", "-result.json")}");
             var outputFile = Path.Combine(execEnv.OutputDirectoryLocation, sessionId, test.FileName.Replace(".json", "-result.json"));
             TestBookHelper.SaveTestToJson(test, outputFile);
             return test;

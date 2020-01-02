@@ -1,4 +1,5 @@
 ﻿using Spider.Common.Enums;
+using System;
 using System.Collections.Generic;
 
 namespace Spider.Common.Model
@@ -14,6 +15,8 @@ namespace Spider.Common.Model
         /// Specify a test directory to run
         /// </summary>
         public string TestsLocation { get; set; }
+        public BrowserType BrowserType => (BrowserType) Enum.Parse(typeof(BrowserType), value: BrowserTypeString, true);
+        public string BrowserTypeString { get; set; }
 
         public ParallelScope ParallelScope { get; set; }
 

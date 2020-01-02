@@ -12,6 +12,47 @@
     {
         public static async Task Main(string[] args)
         {
+
+            var fluentParser = SetupArguments();
+
+            ICommandLineParserResult result;
+            result = fluentParser.Parse(args);
+
+            if (result.HasErrors == false)
+            {
+                if (fluentParser.Object.Tests != null)
+                {
+                    var tests = fluentParser.Object.Tests;
+                    if (fluentParser.Object.ParallelScope == ParallelScope.None)
+                    {
+                        Console.WriteLine("Executing tests in series");
+                        foreach (var test in tests)
+                        {
+                            await ExecuteTestAsync(test, fluentParser.Object);
+                        }
+                    }
+
+                    if (fluentParser.Object.ParallelScope == ParallelScope.All)
+                    {
+                        Console.WriteLine("Executing tests in parallel");
+                        Parallel.ForEach(tests, async test =>
+                        {
+                            await ExecuteTestAsync(test, fluentParser.Object);
+                        });
+                    }
+                }
+            }
+            else
+            {
+                Console.Write("Spider-cli: ");
+                Console.WriteLine(result.ErrorText);
+                Console.WriteLine("Try `Spider-cli.exe --help' for more information.");
+                return;
+            }
+        }
+
+        private static FluentCommandLineParser<ExecutionEnvironment> SetupArguments()
+        {
             var fluentParser = new FluentCommandLineParser<ExecutionEnvironment>();
 
             fluentParser.Setup(arg => arg.Tests)
@@ -25,6 +66,10 @@
             fluentParser.Setup(arg => arg.ParallelScope)
                 .As('p', "parallel-scope")
                 .WithDescription("\nDefine the running Parallel scope (None/All) in series or in parallel");
+
+            fluentParser.Setup(arg => arg.BrowserTypeString)
+                .As('b', "browser-type").SetDefault("chrome")
+                .WithDescription("\nDefine the running browser type");
 
             fluentParser.Setup(arg => arg.OutputDirectoryLocation)
                 .As('o', "output-directory")
@@ -45,48 +90,14 @@
             fluentParser.SetupHelp("?", "help")
                 .Callback(text => Console.WriteLine(text));
 
-            ICommandLineParserResult result;
-            result = fluentParser.Parse(args);
+            return fluentParser;
 
-            await WebDriverHelper.EnsureChromeDriverAsync();
-
-            if (result.HasErrors == false)
-            {
-                if (fluentParser.Object.Tests != null)
-                {
-                    var tests = fluentParser.Object.Tests;
-                    if (fluentParser.Object.ParallelScope == ParallelScope.None)
-                    {
-                        Console.WriteLine("Executing tests in series");
-                        foreach (var test in tests)
-                        {
-                            ExecuteTest(test, fluentParser.Object);
-                        }
-                    }
-
-                    if (fluentParser.Object.ParallelScope == ParallelScope.All)
-                    {
-                        Console.WriteLine("Executing tests in parallel");
-                        Parallel.ForEach(tests, test =>
-                        {
-                            ExecuteTest(test, fluentParser.Object);
-                        });
-                    }
-                }
-            }
-            else
-            {
-                Console.Write("Spider-cli: ");
-                Console.WriteLine(result.ErrorText);
-                Console.WriteLine("Try `Spider-cli.exe --help' for more information.");
-                return;
-            }
         }
 
-        private static void ExecuteTest(string test, ExecutionEnvironment execEnv)
+        private static async Task ExecuteTestAsync(string test, ExecutionEnvironment execEnv)
         {
             Console.WriteLine("Begin Executing test");
-            var executionTest = SeleniumTestLauncher.ExecuteTestFromJson(test, execEnv);
+            var executionTest = await SeleniumTestLauncher.ExecuteTestFromJsonAsync(test, execEnv);
             Console.WriteLine($"End Executing {executionTest.Name}");
             var status = executionTest.Failed ? "Failed" : "Success";
             Console.WriteLine($"{status}");

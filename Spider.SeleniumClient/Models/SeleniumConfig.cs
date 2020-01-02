@@ -13,8 +13,9 @@
 
         public static bool GridEnabled => ConfigHelper.GetBoolValue("Selenium.Grid.Enabled");
 
-        public static string ChromeDriverLocation => ConfigHelper.GetStringValue("Selenium.ChromeDriver.Location");
+        public static string WebDriverLocation => ConfigHelper.GetStringValue("Selenium.WebDriver.Location");
         public static string LastChromeDriverVersionUrl => ConfigHelper.GetStringValue("Selenium.ChromeDriver.LastChromeDriverVersionUrl");
+        public static string LastFirefoxDriverVersionUrl => ConfigHelper.GetStringValue("Selenium.ChromeDriver.LastFirefoxDriverVersionUrl");
 
         public static string ScreenshotLocation => ConfigHelper.GetStringValue("Selenium.Screenshot.Location");
 

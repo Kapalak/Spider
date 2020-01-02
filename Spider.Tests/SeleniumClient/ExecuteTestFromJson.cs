@@ -12,7 +12,8 @@
         [SetUp]
         public async Task GlobalSetup()
         {
-            await WebDriverHelper.EnsureChromeDriverAsync();
+            ExecutionEnvironment executionEnvironment = new ExecutionEnvironment() { };
+            await WebDriverHelper.EnsureDriverAsync(executionEnvironment);
         }
 
         [Category("INT-TEST")]
@@ -30,7 +31,7 @@
                 SiteMapDirectoryLocation = ".", 
                 ScenarioDirectoryLocation = "."
             };
-            SeleniumTestLauncher.ExecuteTestFromJson(jsonFile, envExecution);
+            SeleniumTestLauncher.ExecuteTestFromJsonAsync(jsonFile, envExecution);
         }
 
         [Category("UNIT-TEST")]
