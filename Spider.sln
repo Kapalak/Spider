@@ -17,8 +17,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spider-cli", "Spider-cli\Sp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spider.Steps", "Spider.Steps\Spider.Steps.csproj", "{D31B2954-06F3-466C-84B0-D782E315A129}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spider.Steps.UnitTests", "Spider.Steps.UnitTests\Spider.Steps.UnitTests.csproj", "{EBAFF102-A73B-4D2D-90C5-B54885E20888}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,10 +51,6 @@ Global
 		{D31B2954-06F3-466C-84B0-D782E315A129}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D31B2954-06F3-466C-84B0-D782E315A129}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D31B2954-06F3-466C-84B0-D782E315A129}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EBAFF102-A73B-4D2D-90C5-B54885E20888}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EBAFF102-A73B-4D2D-90C5-B54885E20888}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EBAFF102-A73B-4D2D-90C5-B54885E20888}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EBAFF102-A73B-4D2D-90C5-B54885E20888}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
