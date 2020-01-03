@@ -19,7 +19,7 @@ namespace Spider.Common.Model
         public string BrowserTypeString { get; set; } = "chrome";
         public ParallelScope ParallelScope { get; set; }
 
-        public string OutputDirectoryLocation { get; set; }
+        public string OutputDirectoryLocation { get; set; } = ".\results";
 
         public string ScenarioDirectoryLocation { get; set; }
         public string ContextDirectoryLocation { get; set; }

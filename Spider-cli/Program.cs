@@ -4,7 +4,6 @@
     using Spider.Common.Enums;
     using Spider.Common.Model;
     using Spider.SeleniumClient;
-    using Spider.SeleniumClient.Helpers;
     using System;
     using System.Threading.Tasks;
 
