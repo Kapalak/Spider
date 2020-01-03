@@ -16,8 +16,7 @@ namespace Spider.Common.Model
         /// </summary>
         public string TestsLocation { get; set; }
         public BrowserType BrowserType => (BrowserType) Enum.Parse(typeof(BrowserType), value: BrowserTypeString, true);
-        public string BrowserTypeString { get; set; }
-
+        public string BrowserTypeString { get; set; } = "chrome";
         public ParallelScope ParallelScope { get; set; }
 
         public string OutputDirectoryLocation { get; set; }
