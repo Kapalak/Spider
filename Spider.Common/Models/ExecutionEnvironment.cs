@@ -25,5 +25,6 @@ namespace Spider.Common.Model
         public string ScenarioDirectoryLocation { get; set; }
         public string ContextDirectoryLocation { get; set; }
         public string SiteMapDirectoryLocation { get; set; }
+        public bool GridEnabled { get; set; }
     }
 }

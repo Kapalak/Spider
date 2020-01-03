@@ -11,8 +11,6 @@
 
         public static Uri SeleniumHubEndPoint => new Uri(string.Format("http://{0}:{1}/wd/hub", SeleniumConfig.SeleniumHubAddress, SeleniumConfig.SeleniumHubPort), UriKind.Absolute);
 
-        public static bool GridEnabled => ConfigHelper.GetBoolValue("Selenium.Grid.Enabled");
-
         public static string WebDriverLocation => ConfigHelper.GetStringValue("Selenium.WebDriver.Location");
         public static string LastChromeDriverVersionUrl => ConfigHelper.GetStringValue("Selenium.ChromeDriver.LastChromeDriverVersionUrl");
         public static string LastFirefoxDriverVersionUrl => ConfigHelper.GetStringValue("Selenium.ChromeDriver.LastFirefoxDriverVersionUrl");

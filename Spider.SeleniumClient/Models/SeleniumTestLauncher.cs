@@ -38,7 +38,10 @@ namespace Spider.SeleniumClient
                     } 
                     else
                     {
-                        await WebDriverHelper.EnsureDriverAsync(executionEnvironment);
+                        if (executionEnvironment.GridEnabled == false)
+                        {
+                            await WebDriverHelper.EnsureDriverAsync(executionEnvironment);
+                        }
                     }
 
                     step.Execute(ref testWebDriver, executionEnvironment);
@@ -74,7 +77,7 @@ namespace Spider.SeleniumClient
                 switch (step.Type)
                 {
                     case (StepType.CREATE_SESSION):
-                        webDriver = WebDriverHelper.CreateSession(executionEnvironment.BrowserType);
+                        webDriver = WebDriverHelper.CreateSession(executionEnvironment);
                         var sessionId = ((OpenQA.Selenium.Remote.RemoteWebDriver)webDriver).SessionId;
                         webDriver.ResizeWindow(SeleniumConfig.BrowserSize);
                         step.SessionId = sessionId.ToString();
@@ -104,6 +107,9 @@ namespace Spider.SeleniumClient
                         {
                             throw new Exception($"{step.Param} return {result} and not {step.Value} as expected.");
                         }
+                        break;
+                    case (StepType.ASSERT_EXISTS):
+                        webDriver.AssertExists(step.Selector);
                         break;
                     case StepType.EXECUTE_SCENARIO:
                         throw new InvalidOperationException("Selenium launcher execute only elementary step");

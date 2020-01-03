@@ -23,13 +23,10 @@
         public static int FetchRetries => ConfigHelper.GetIntValue("SeleniumClient.Fetch.MaxRetries", 1);
         public static int RetrySleepInterval => ConfigHelper.GetIntValue("SeleniumClient.Fetch.RetrySleepInterval", 500);
 
-        public static IWebDriver CreateSession(BrowserType browserType)
+        public static IWebDriver CreateSession(ExecutionEnvironment executionEnvironment)
         {
             ChromeOptions chromeOptions = new ChromeOptions();
             chromeOptions.AddArgument(string.Format("--lang={0}", CultureInfo.CurrentCulture));
-            DesiredCapabilities desiredCapabilities = new DesiredCapabilities("chrome", string.Empty, new Platform(PlatformType.Any));
-            desiredCapabilities.SetCapability(ChromeOptions.Capability,
-                string.Format(CultureInfo.InvariantCulture, "--lang={0}", CultureInfo.CurrentCulture));
 
             FirefoxOptions firefoxOptions = new FirefoxOptions();
             firefoxOptions.BrowserExecutableLocation = @"C:\Program Files\Mozilla Firefox\firefox.exe";
@@ -37,9 +34,9 @@
             var projectOutputDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             var webDriverPath = Path.Combine(projectOutputDirectory, SeleniumConfig.WebDriverLocation);
 
-            IWebDriver webDriver = SeleniumConfig.GridEnabled ?
-                new RemoteWebDriver(SeleniumConfig.SeleniumHubEndPoint, desiredCapabilities) :
-                    browserType == BrowserType.CHROME ?
+            IWebDriver webDriver = executionEnvironment.GridEnabled ?
+                new RemoteWebDriver(new Uri(SeleniumConfig.SeleniumHubAddress), executionEnvironment.BrowserType == BrowserType.CHROME ? (DriverOptions) chromeOptions : firefoxOptions) :
+                    executionEnvironment.BrowserType == BrowserType.CHROME ?
                     (IWebDriver)new ChromeDriver(webDriverPath, chromeOptions, TimeSpan.FromSeconds(60)) :
                     (IWebDriver)new FirefoxDriver(webDriverPath, firefoxOptions, TimeSpan.FromSeconds(60));
             return webDriver;
@@ -81,6 +78,17 @@
                 throw new Exception($"{selector.Name} Text equal to {element.Text} is not like excpeted {value}");
             }
         }
+
+        public static void AssertExists(this IWebDriver webDriver, Selector selector)
+        {
+            var element = webDriver.UniqueElement(selector);
+
+            if (element == null)
+            {
+                throw new Exception($"{element.Text} doesn't exist on the DOM.");
+            }
+        }
+
 
         public static void TakeScreenshot(this IWebDriver webDriver, string fileName, string outputDirectory)
         {

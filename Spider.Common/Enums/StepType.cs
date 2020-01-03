@@ -32,7 +32,13 @@
         /// ASSERT TEXT.
         /// </summary>
         [Description("ASSERT_TEXT")]
-        ASSERT_TEXT = 4,        
+        ASSERT_TEXT = 4,
+
+        /// <summary>
+        /// ASSERT Element exists.
+        /// </summary>
+        [Description("ASSERT_EXISTS")]
+        ASSERT_EXISTS = 5,
 
         /// <summary>
         /// Takescreenshot.

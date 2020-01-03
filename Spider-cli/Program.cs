@@ -87,6 +87,10 @@
                 .As('m', "sitemap-directory")
                 .WithDescription("\nDefine the sitemap directory");
 
+            fluentParser.Setup(arg => arg.GridEnabled)
+               .As('g', "grid-enabled")
+               .WithDescription("\nExecute test on remote selenium grid");
+
             fluentParser.SetupHelp("?", "help")
                 .Callback(text => Console.WriteLine(text));
 
