@@ -10,9 +10,12 @@
     using Spider.Common.Enums;
     using Spider.Common.Model;
     using SiteMapManager.Models;
+    using NLog;
 
     public static class TestBookHelper
     {
+        private static readonly Logger _log_ = LogManager.GetCurrentClassLogger();
+
         public static Test ReadTestFromJson(string jsonFile)
         {
             var projectOutputDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
@@ -45,7 +48,7 @@
                     string value = property.GetValue(step, null)?.ToString();
 
                     if (value != null && value.StartsWith("#"))
-                    {
+                    {                        
                         string[] pathElements = value.Substring(1).Split('.');
                         var pageKey = pathElements[0];
                         string propertyPath = value.Substring(1 + 1 + pageKey.Length);
@@ -62,6 +65,7 @@
                         {
                             step.Selector = (Selector)selectorValue;
                         }
+                        _log_.Trace($"Convert FromPage Object {value} / {step.Param} / {step.Selector}");
                     }
                 }
             }
@@ -75,6 +79,7 @@
                 filePath = test.FilePath;
             }
             var directoryName = Path.GetDirectoryName(filePath);
+            _log_.Trace($"Save Test ToJson {filePath}");
             if (!string.IsNullOrEmpty(directoryName) && !Directory.Exists(directoryName))
             {
                 Directory.CreateDirectory(directoryName);
@@ -83,15 +88,16 @@
             JsonHelper.SaveObjectIntoFile(test, filePath);
         }
 
-        public static Test ConvertScenarioToElementarySteps(this Test test, ExecutionEnvironment execEnv)
+        public static Test ConvertScenarioToElementarySteps(this Test test, ExecutionEnvironment executionEnvironment)
         {
             //foreach (var step in test.Steps)
             for (int index = 0; index < test.Steps.Count; index++)
             {
                 if (test.Steps[index].Type == StepType.EXECUTE_SCENARIO)
                 {
-                    var elementarySteps = test.Steps[index].ConvertScenarioToElementarySteps(execEnv);
-                    var contextToApply = ContextLoader.Instance.GetContext(test.Steps[index].Value, execEnv.ContextDirectoryLocation);
+                    _log_.Trace($"Convert complex test steps to elementary test steps {test.Steps[index].Name}");
+                    var elementarySteps = test.Steps[index].ConvertScenarioToElementarySteps(executionEnvironment);
+                    var contextToApply = ContextLoader.Instance.GetContext(test.Steps[index].Value, executionEnvironment.ContextDirectoryLocation);
                     elementarySteps.ForEach(s => s.ApplyScenarioContext(contextToApply));
                     test.Steps.Remove(test.Steps[index]);
                     test.Steps.InsertRange(index, elementarySteps);
@@ -100,15 +106,16 @@
             return test;
         }
 
-        public static List<Step> ConvertScenarioToElementarySteps(this Step step, ExecutionEnvironment execEnv)
+        public static List<Step> ConvertScenarioToElementarySteps(this Step step, ExecutionEnvironment executionEnvironment)
         {
-            var scenario = ScenarioLoader.Instance.GetScenario(step.Param, execEnv.ScenarioDirectoryLocation);
+            var scenario = ScenarioLoader.Instance.GetScenario(step.Param, executionEnvironment.ScenarioDirectoryLocation);
             for (int index = 0; index < scenario.Steps.Count; index++)
             {
                 if (scenario.Steps[index].Type == StepType.EXECUTE_SCENARIO)
                 {
-                    var elementarySteps = scenario.Steps[index].ConvertScenarioToElementarySteps(execEnv);
-                    var contextToApply = ContextLoader.Instance.GetContext(scenario.Steps[index].Value, execEnv.ContextDirectoryLocation);
+                    _log_.Trace($"Convert complex test steps to elementary test steps {step.Name}");
+                    var elementarySteps = scenario.Steps[index].ConvertScenarioToElementarySteps(executionEnvironment);
+                    var contextToApply = ContextLoader.Instance.GetContext(scenario.Steps[index].Value, executionEnvironment.ContextDirectoryLocation);
                     elementarySteps.ForEach(s => s.ApplyScenarioContext(contextToApply));
                     scenario.Steps.Remove(scenario.Steps[index]);
                     scenario.Steps.InsertRange(index, elementarySteps);
@@ -121,10 +128,11 @@
         {
             var value = step.Value;
             if (value != null && value.StartsWith("$"))
-            {
+            {                
                 string propertyPath = value.Substring(1);
                 var contextValue = (string)ExpandoHelper.GetDynamicMember(context, propertyPath);
                 step.Value = contextValue;
+                _log_.Trace($"Replacing Scenario Context {step.Name} / {step.Value} / {contextValue}");
             }
         }
 
@@ -137,6 +145,7 @@
                 var currentStep = test.Steps[index];
                 if (currentStep.TakeScreenshotBefore && currentStep.Type != StepType.TAKE_SCREENSHOT && currentStep.Type!= StepType.CREATE_SESSION)
                 {
+                    _log_.Trace($"Insert Screenshot Steps before {currentStep.Name}");
                     test.Steps.Insert(insertionIndex, new Step()
                     {
                         Name = "TAKE_SCREENSHOT",
@@ -149,6 +158,7 @@
                 }
                 if (currentStep.TakeScreenshotAfter && currentStep.Type != StepType.TAKE_SCREENSHOT)
                 {
+                    _log_.Trace($"Insert Screenshot Steps after {currentStep.Name}");
                     test.Steps.Insert(insertionIndex + 1, new Step()
                     {
                         Name = "TAKE_SCREENSHOT",
