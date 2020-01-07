@@ -9,16 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Sample\SearchWithGoogleSimple.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Sample\SearchWithGoogleSimple.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="FluentCommandLineParser" Version="1.4.3" />
     <PackageReference Include="NLog" Version="4.6.8" />
   </ItemGroup>
