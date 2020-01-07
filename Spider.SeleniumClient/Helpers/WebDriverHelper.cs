@@ -28,7 +28,7 @@
 
         public static IWebDriver CreateSession(ExecutionEnvironment executionEnvironment)
         {
-            _log_.Trace($"{executionEnvironment.BrowserType} / GridEnabled {executionEnvironment.GridEnabled} ");
+            _log_.Trace($"Create Session : browser type {executionEnvironment.BrowserType} / GridEnabled {executionEnvironment.GridEnabled} ");
 
             ChromeOptions chromeOptions = new ChromeOptions();
             chromeOptions.AddArgument(string.Format("--lang={0}", CultureInfo.CurrentCulture));
@@ -49,7 +49,7 @@
 
         public static void ResizeWindow(this IWebDriver webDriver, Size? windowSize)
         {
-            _log_.Trace($"{windowSize.Value} ");
+            _log_.Trace($"Resize Window {windowSize.Value} ");
             if (windowSize != null)
             {
                 webDriver.Manage().Window.Size = windowSize.Value;
@@ -62,7 +62,7 @@
 
         public static void SmartClick(this IWebDriver webDriver, Selector selector)
         {
-            _log_.Trace($"{selector.SelectorType.ToString()} {selector.Text}");
+            _log_.Trace($"SmartClick {selector.SelectorType.ToString()} {selector.Text}");
             var element = webDriver.UniqueElement(selector);
             if (element.Enabled)
             {
@@ -72,14 +72,14 @@
 
         public static void SetText(this IWebDriver webDriver, Selector selector, string value)
         {
-            _log_.Trace($"{selector.SelectorType.ToString()} {selector.Text} {value}");
+            _log_.Trace($"SetText {selector.SelectorType.ToString()} {selector.Text} {value}");
             var element = webDriver.UniqueElement(selector);
             element.SendKeys(value);
         }
 
         public static void AssertTextEqual(this IWebDriver webDriver, Selector selector, string value)
         {
-            _log_.Trace($"{selector.SelectorType.ToString()} {selector.Text} {value}");
+            _log_.Trace($"AssertTextEqual {selector.SelectorType.ToString()} {selector.Text} {value}");
             var element = webDriver.UniqueElement(selector);
 
             if (!element.Text.Equals(value))
@@ -90,7 +90,7 @@
 
         public static void AssertExists(this IWebDriver webDriver, Selector selector)
         {
-            _log_.Trace($"{selector.SelectorType.ToString()} {selector.Text}");
+            _log_.Trace($"AssertExists {selector.SelectorType.ToString()} {selector.Text}");
             var element = webDriver.UniqueElement(selector);
 
             if (element == null)
@@ -101,7 +101,7 @@
 
         public static void TakeScreenshot(this IWebDriver webDriver, string fileName, string outputDirectory)
         {
-            _log_.Trace($"{outputDirectory} {fileName}");           
+            _log_.Trace($"TakeScreenshot {outputDirectory} {fileName}");           
             var sessionId = ((RemoteWebDriver)webDriver).SessionId;
             var screenshotFullPath = Path.Combine(outputDirectory, $"{sessionId}");
             var screenshot = ((ITakesScreenshot)webDriver).GetScreenshot();
@@ -122,7 +122,7 @@
 
         public static IWebElement UniqueElement(this IWebDriver webDriver, Selector selector)
         {
-            _log_.Trace($"{selector.SelectorType.ToString()} {selector.Text}");
+            _log_.Trace($"Get UniqueElement {selector.SelectorType.ToString()} {selector.Text}");
             IWebElement element = null;
             Exception exception = null;
             int retry = 0;
