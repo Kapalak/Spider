@@ -85,7 +85,7 @@
                 .As('d', "tests-location")
                 .WithDescription("\nSelected tests location to be ran");
 
-            fluentParser.Setup(arg => arg.ParallelScope)
+            fluentParser.Setup(arg => arg.ParallelScopeString)
                 .As('p', "parallel-scope")
                 .WithDescription("\nDefine the running Parallel scope (None/All) in series or in parallel");
 

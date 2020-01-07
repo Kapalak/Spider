@@ -251,10 +251,15 @@
                     client.Headers.Add("Accept-Encoding", "gzip, deflate, br");
                     client.Headers.Add("Accept-Language", "fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7");
                     client.Headers.Add("Cache-Control", "no-cache");
-                    _log_.Info($"Downloading driver zip file from {zipUrl} ... ");
+                    //client.Headers.Add("Connection", "keep-alive");
+                    client.Headers.Add("Sec-Fetch-Site", "cross-site");
+                    client.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36");
+                    var fileFullPath = Path.Combine(path, zipFile);
+                    _log_.Info($"Downloading driver zip file from {fileFullPath} ... ");
                     client.Headers.Add("Accept-Encoding", "gzip, deflate, br");
-                    client.DownloadFile(new Uri(zipUrl), zipFile);
-                    _log_.Info($"{zipUrl} donwloaded. ");
+                    client.DownloadFile(new Uri(zipUrl), fileFullPath);
+                    //File.Move(zipFile, fileFullPath);
+                    _log_.Info($"{Path.Combine(path, zipFile)} donwloaded. ");
                 }
 
                 FileInfo zipFileInfo = new FileInfo(Path.Combine(path, zipFile));
