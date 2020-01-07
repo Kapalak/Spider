@@ -7,7 +7,6 @@ namespace Spider.TestbookManager.Models
     using System;
     using System.Collections.Generic;
     using System.IO;
-    using System.Reflection;
 
     public class ScenarioLoader
     {
