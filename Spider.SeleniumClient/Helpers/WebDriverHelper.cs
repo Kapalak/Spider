@@ -1,5 +1,6 @@
 ﻿namespace Spider.SeleniumClient.Helpers
 {
+    using NLog;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Chrome;
     using OpenQA.Selenium.Firefox;
@@ -20,11 +21,15 @@
 
     public static class WebDriverHelper
     {
+        private static readonly Logger _log_ = LogManager.GetCurrentClassLogger();
+
         public static int FetchRetries => ConfigHelper.GetIntValue("SeleniumClient.Fetch.MaxRetries", 1);
         public static int RetrySleepInterval => ConfigHelper.GetIntValue("SeleniumClient.Fetch.RetrySleepInterval", 500);
 
         public static IWebDriver CreateSession(ExecutionEnvironment executionEnvironment)
         {
+            _log_.Trace($"{executionEnvironment.BrowserType} / GridEnabled {executionEnvironment.GridEnabled} ");
+
             ChromeOptions chromeOptions = new ChromeOptions();
             chromeOptions.AddArgument(string.Format("--lang={0}", CultureInfo.CurrentCulture));
 
@@ -44,6 +49,7 @@
 
         public static void ResizeWindow(this IWebDriver webDriver, Size? windowSize)
         {
+            _log_.Trace($"{windowSize.Value} ");
             if (windowSize != null)
             {
                 webDriver.Manage().Window.Size = windowSize.Value;
@@ -56,6 +62,7 @@
 
         public static void SmartClick(this IWebDriver webDriver, Selector selector)
         {
+            _log_.Trace($"{selector.SelectorType.ToString()} {selector.Text}");
             var element = webDriver.UniqueElement(selector);
             if (element.Enabled)
             {
@@ -65,12 +72,14 @@
 
         public static void SetText(this IWebDriver webDriver, Selector selector, string value)
         {
+            _log_.Trace($"{selector.SelectorType.ToString()} {selector.Text} {value}");
             var element = webDriver.UniqueElement(selector);
             element.SendKeys(value);
         }
 
         public static void AssertTextEqual(this IWebDriver webDriver, Selector selector, string value)
         {
+            _log_.Trace($"{selector.SelectorType.ToString()} {selector.Text} {value}");
             var element = webDriver.UniqueElement(selector);
 
             if (!element.Text.Equals(value))
@@ -81,6 +90,7 @@
 
         public static void AssertExists(this IWebDriver webDriver, Selector selector)
         {
+            _log_.Trace($"{selector.SelectorType.ToString()} {selector.Text}");
             var element = webDriver.UniqueElement(selector);
 
             if (element == null)
@@ -89,11 +99,9 @@
             }
         }
 
-
         public static void TakeScreenshot(this IWebDriver webDriver, string fileName, string outputDirectory)
         {
-            //var projectOutputDirectory = 
-            //Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            _log_.Trace($"{outputDirectory} {fileName}");           
             var sessionId = ((RemoteWebDriver)webDriver).SessionId;
             var screenshotFullPath = Path.Combine(outputDirectory, $"{sessionId}");
             var screenshot = ((ITakesScreenshot)webDriver).GetScreenshot();
@@ -114,6 +122,7 @@
 
         public static IWebElement UniqueElement(this IWebDriver webDriver, Selector selector)
         {
+            _log_.Trace($"{selector.SelectorType.ToString()} {selector.Text}");
             IWebElement element = null;
             Exception exception = null;
             int retry = 0;
@@ -136,6 +145,7 @@
                 }
                 catch (Exception ex)
                 {
+                    _log_.Warn($"{ex.StackTrace} {ex.Message}");
                     //Silently error
                 }
                 retry++;
@@ -173,15 +183,16 @@
 
                 var path = new FileInfo(Assembly.GetEntryAssembly().Location).Directory.ToString();
                 //Directory.GetCurrentDirectory();
-                Console.WriteLine($"Spider Workdirectory is : {path}");
+                _log_.Info($"Spider Workdirectory is : {path}");
+                _log_.Info($"Spider Workdirectory is : {path}");
                 //Environment.CurrentDirectory;
                 // Path.GetTempPath();
 
-                Console.WriteLine($"The last chrome driver: chromeLastVersion / Source {SeleniumConfig.LastChromeDriverVersionUrl}");
+                _log_.Info($"The last chrome driver: chromeLastVersion / Source {SeleniumConfig.LastChromeDriverVersionUrl}");
                 var zipFile = $"chromedriver_{chromeLastVersion}_win32.zip";
 
-                Console.WriteLine($"check if {Path.Combine(path, zipFile)} exist");
-                Console.WriteLine($"check if {Path.Combine(path, "chrome", "chromedriver.exe")} exist");
+                _log_.Info($"check if {Path.Combine(path, zipFile)} exist");
+                _log_.Info($"check if {Path.Combine(path, "chrome", "chromedriver.exe")} exist");
                 if (
                     !File.Exists(Path.Combine(path, zipFile)) ||
                     !File.Exists(Path.Combine(path, SeleniumConfig.WebDriverLocation, "chromedriver.exe"))
@@ -190,7 +201,7 @@
                     using (var cli = new WebClient())
                     {
                         var zipUrl = $"https://chromedriver.storage.googleapis.com/{chromeLastVersion}/chromedriver_win32.zip";
-                        Console.WriteLine($"Download driver zip file from {zipUrl}");
+                        _log_.Info($"Download driver zip file from {zipUrl}");
                         var bytes = await Task.Run(() => cli.DownloadData(zipUrl));
 
                         using (var stream = File.Create(Path.Combine(path, zipFile)))
@@ -206,7 +217,7 @@
                     {
                         File.Delete(Path.Combine(driverDirFullPath, SeleniumConfig.WebDriverLocation));
                     }
-                    Console.WriteLine($"Unzipping ino {zipFileInfo.FullName}");
+                    _log_.Info($"Unzipping ino {zipFileInfo.FullName}");
                     ZipFile.ExtractToDirectory(zipFileInfo.FullName, Path.Combine(zipFileInfo.DirectoryName, SeleniumConfig.WebDriverLocation), System.Text.Encoding.ASCII);
                 }
             }
@@ -240,10 +251,10 @@
                     client.Headers.Add("Accept-Encoding", "gzip, deflate, br");
                     client.Headers.Add("Accept-Language", "fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7");
                     client.Headers.Add("Cache-Control", "no-cache");
-                    Console.WriteLine($"Downloading driver zip file from {zipUrl} ... ");
+                    _log_.Info($"Downloading driver zip file from {zipUrl} ... ");
                     client.Headers.Add("Accept-Encoding", "gzip, deflate, br");
                     client.DownloadFile(new Uri(zipUrl), zipFile);
-                    Console.WriteLine($"{zipUrl} donwloaded. ");
+                    _log_.Info($"{zipUrl} donwloaded. ");
                 }
 
                 FileInfo zipFileInfo = new FileInfo(Path.Combine(path, zipFile));
@@ -252,7 +263,7 @@
                 {
                     File.Delete(Path.Combine(driverDirFullPath, SeleniumConfig.WebDriverLocation));
                 }
-                Console.WriteLine($"Unzipping ino {zipFileInfo.FullName}");
+                _log_.Info($"Unzipping ino {zipFileInfo.FullName}");
                 ZipFile.ExtractToDirectory(zipFileInfo.FullName, Path.Combine(zipFileInfo.DirectoryName, SeleniumConfig.WebDriverLocation), System.Text.Encoding.ASCII);
                 await Task.Delay(1000);
             }

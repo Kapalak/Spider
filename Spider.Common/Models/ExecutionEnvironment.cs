@@ -1,4 +1,5 @@
-﻿using Spider.Common.Enums;
+﻿using NLog;
+using Spider.Common.Enums;
 using System;
 using System.Collections.Generic;
 
@@ -25,5 +26,8 @@ namespace Spider.Common.Model
         public string ContextDirectoryLocation { get; set; }
         public string SiteMapDirectoryLocation { get; set; }
         public bool GridEnabled { get; set; }
+
+        public string LogLevelString { get; set; } = "Error";
+        public LogLevel LogLevel => LogLevel.FromString(LogLevelString);
     }
 }

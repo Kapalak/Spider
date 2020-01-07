@@ -1,6 +1,7 @@
 ﻿namespace Spider_cli
 {
     using Fclp;
+    using NLog;
     using Spider.Common.Enums;
     using Spider.Common.Model;
     using Spider.SeleniumClient;
@@ -9,22 +10,44 @@
 
     class Program
     {
+        private static readonly Logger _log_ = LogManager.GetCurrentClassLogger();
+
         public static async Task Main(string[] args)
         {
 
-            var fluentParser = SetupArguments();
+            var config = new NLog.Config.LoggingConfiguration();
 
+            // Targets where to log to: File and Console
+            //var logfile = new NLog.Targets.FileTarget("logfile") { FileName = "file.txt" };
+            //config.AddRule(LogLevel.Debug, LogLevel.Fatal, logfile);
+
+            // Rules for mapping loggers to targets        
+            var logconsole = new NLog.Targets.ConsoleTarget("logconsole");
+            config.AddRule(LogLevel.Info, LogLevel.Fatal, logconsole);
+
+            // Apply config           
+            LogManager.Configuration = config;
+
+
+            var fluentParser = SetupArguments();
             ICommandLineParserResult result;
             result = fluentParser.Parse(args);
 
+
+
             if (result.HasErrors == false)
             {
+                for (int index = 0; index < LogManager.Configuration.LoggingRules.Count; index++)
+                {
+                    LogManager.Configuration.LoggingRules[index].SetLoggingLevels(fluentParser.Object.LogLevel, LogLevel.Fatal);
+                }
+
                 if (fluentParser.Object.Tests != null)
                 {
                     var tests = fluentParser.Object.Tests;
                     if (fluentParser.Object.ParallelScope == ParallelScope.None)
                     {
-                        Console.WriteLine("Executing tests in series");
+                        _log_.Info("Executing tests in series");
                         foreach (var test in tests)
                         {
                             await ExecuteTestAsync(test, fluentParser.Object);
@@ -33,7 +56,7 @@
 
                     if (fluentParser.Object.ParallelScope == ParallelScope.All)
                     {
-                        Console.WriteLine("Executing tests in parallel");
+                        _log_.Info("Executing tests in parallel");
                         Parallel.ForEach(tests, async test =>
                         {
                             await ExecuteTestAsync(test, fluentParser.Object);
@@ -43,9 +66,9 @@
             }
             else
             {
-                Console.Write("Spider-cli: ");
-                Console.WriteLine(result.ErrorText);
-                Console.WriteLine("Try `Spider-cli.exe --help' for more information.");
+                _log_.Error("Spider-cli: ");
+                _log_.Error(result.ErrorText);
+                _log_.Error("Try `Spider-cli.exe --help' for more information.");
                 return;
             }
         }
@@ -59,7 +82,7 @@
                 .WithDescription("\nSelected tests to be ran");
 
             fluentParser.Setup(arg => arg.TestsLocation)
-                .As('l', "tests-location")
+                .As('d', "tests-location")
                 .WithDescription("\nSelected tests location to be ran");
 
             fluentParser.Setup(arg => arg.ParallelScope)
@@ -90,8 +113,12 @@
                .As('g', "grid-enabled")
                .WithDescription("\nExecute test on remote selenium grid");
 
+            fluentParser.Setup(arg => arg.LogLevelString)
+               .As('l', "log-level")
+               .WithDescription("\nChoose the log level");
+
             fluentParser.SetupHelp("?", "help")
-                .Callback(text => Console.WriteLine(text));
+                .Callback(text => _log_.Info(text));
 
             return fluentParser;
 
@@ -99,14 +126,18 @@
 
         private static async Task ExecuteTestAsync(string test, ExecutionEnvironment execEnv)
         {
-            Console.WriteLine("Begin Executing test");
+            _log_.Info("Begin Executing test");
+
             var executionTest = await SeleniumTestLauncher.ExecuteTestFromJsonAsync(test, execEnv);
-            Console.WriteLine($"End Executing {executionTest.Name}");
+            _log_.Info($"End Executing {executionTest.Name}");
             var status = executionTest.Failed ? "Failed" : "Success";
-            Console.WriteLine($"{status}");
+            Console.ForegroundColor = executionTest.Failed ? ConsoleColor.Red : ConsoleColor.Green;
+            Console.WriteLine($"{test} {status}");
+            Console.ResetColor();
             Console.WriteLine($"{executionTest.StackTrace}");
             Console.WriteLine($"{executionTest.Measure.StartDate}");
             Console.WriteLine($"{executionTest.Measure.EndDate}");
+           
         }
     }
 }
