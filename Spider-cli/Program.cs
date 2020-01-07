@@ -6,6 +6,7 @@
     using Spider.Common.Model;
     using Spider.SeleniumClient;
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     class Program
@@ -57,10 +58,13 @@
                     if (fluentParser.Object.ParallelScope == ParallelScope.All)
                     {
                         _log_.Info("Executing tests in parallel");
-                        Parallel.ForEach(tests, async test =>
+                        List<Task> tasks = new List<Task>();
+                        foreach (var test in tests)
                         {
-                            await ExecuteTestAsync(test, fluentParser.Object);
-                        });
+                            tasks.Add(ExecuteTestAsync(test, fluentParser.Object));
+                        }
+
+                        Task.WaitAll(tasks.ToArray());
                     }
                 }
             }
