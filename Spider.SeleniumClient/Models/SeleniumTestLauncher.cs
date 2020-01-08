@@ -1,8 +1,7 @@
-﻿using System.IO;
-using OpenQA.Selenium.Support.Extensions;
-
-namespace Spider.SeleniumClient
+﻿namespace Spider.SeleniumClient
 {
+    using System.IO;
+    using OpenQA.Selenium.Support.Extensions;
     using System;
     using OpenQA.Selenium;
     using Spider.Common.Enums;
@@ -11,9 +10,11 @@ namespace Spider.SeleniumClient
     using Spider.Common.Model;
     using Spider.TestbookManager.Helper;
     using System.Threading.Tasks;
+    using NLog;
 
     public static class SeleniumTestLauncher
     {
+        private static readonly Logger _log_ = LogManager.GetCurrentClassLogger();
         public static string CreateJsonSampleTest()
         {
             Test newTest = new Test() { Name = "My First Test", Description = "This Test ..." };
@@ -26,6 +27,7 @@ namespace Spider.SeleniumClient
         public static async Task<string> ExecuteAsync(this Test test, ExecutionEnvironment executionEnvironment)
         {
             test.Measure.StartDate = DateTime.Now;
+            _log_.Trace($"Begin Executing test {test.Name} | {test.Measure.StartDate}");
             string sessionId = string.Empty;
             IWebDriver testWebDriver = null;
             try
@@ -66,6 +68,7 @@ namespace Spider.SeleniumClient
                 }
             }
 
+            _log_.Trace($"End Executing test {test.Name} | {test.Measure.StartDate} - {test.Measure.EndDate}");
             return sessionId;
         }
 
@@ -74,6 +77,7 @@ namespace Spider.SeleniumClient
             try
             {
                 step.Measure.StartDate = DateTime.Now;
+                _log_.Trace($"Begin Executing Step {step.Name} | {step.Measure.StartDate}");
                 switch (step.Type)
                 {
                     case (StepType.CREATE_SESSION):
@@ -118,6 +122,7 @@ namespace Spider.SeleniumClient
 
                 }
                 step.Measure.EndDate = DateTime.Now;
+                _log_.Trace($"End Executing Step {step.Name} | {step.Measure.StartDate} - {step.Measure.EndDate}");
             }
             catch (Exception ex)
             {

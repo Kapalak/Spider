@@ -15,7 +15,6 @@
     public static class TestBookHelper
     {
         private static readonly Logger _log_ = LogManager.GetCurrentClassLogger();
-
         public static Test ReadTestFromJson(string jsonFile)
         {
             var projectOutputDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);

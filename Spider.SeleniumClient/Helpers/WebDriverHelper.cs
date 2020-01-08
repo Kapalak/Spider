@@ -33,8 +33,10 @@
             ChromeOptions chromeOptions = new ChromeOptions();
             chromeOptions.AddArgument(string.Format("--lang={0}", CultureInfo.CurrentCulture));
 
-            FirefoxOptions firefoxOptions = new FirefoxOptions();
-            firefoxOptions.BrowserExecutableLocation = @"C:\Program Files\Mozilla Firefox\firefox.exe";
+            FirefoxOptions firefoxOptions = new FirefoxOptions
+            {
+                BrowserExecutableLocation = @"C:\Program Files\Mozilla Firefox\firefox.exe"
+            };
 
             var projectOutputDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             var webDriverPath = Path.Combine(projectOutputDirectory, SeleniumConfig.WebDriverLocation);
