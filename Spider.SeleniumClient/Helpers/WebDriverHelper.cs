@@ -37,9 +37,9 @@
             {
                 BrowserExecutableLocation = @"C:\Program Files\Mozilla Firefox\firefox.exe"
             };
-
-            var projectOutputDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            var webDriverPath = Path.Combine(projectOutputDirectory, SeleniumConfig.WebDriverLocation);
+            
+            var path = new FileInfo(Assembly.GetEntryAssembly().Location).Directory.ToString();
+            var webDriverPath = Path.Combine(path, SeleniumConfig.WebDriverLocation);
             _log_.Trace($"webDriverPath {webDriverPath}");
 
             IWebDriver webDriver = executionEnvironment.GridEnabled ?
