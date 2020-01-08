@@ -31,7 +31,7 @@
             _log_.Trace($"Create Session : browser type {executionEnvironment.BrowserType} / GridEnabled {executionEnvironment.GridEnabled} ");            
 
             ChromeOptions chromeOptions = new ChromeOptions();
-            chromeOptions.AddArgument(string.Format("--lang={0}", CultureInfo.CurrentCulture));
+            //chromeOptions.AddArgument(string.Format("--lang={0}", CultureInfo.CurrentCulture));
 
             FirefoxOptions firefoxOptions = new FirefoxOptions();
 
@@ -143,7 +143,7 @@
                     if (webElements.Count > 1)
                     {
                         exception = new InvalidSelectorException(
-                            $"{selector.Name} return more than 1 displayed element");
+                            $"{selector.Text} return more than 1 displayed element");
                     }
 
                     element = webElements.FirstOrDefault();
@@ -160,7 +160,7 @@
             {
                 if (exception == null)
                 {
-                    throw new InvalidSelectorException($"{selector.Name} no element to return with this selector");
+                    throw new InvalidSelectorException($"No element to return with this selector {selector.Text}");
                 }
                 throw exception;
             }

@@ -88,7 +88,6 @@
                         step.SessionId = sessionId.ToString();
                         break;
                     case (StepType.NAVIGATE_URL):
-                        //webDriver.Url = step.Param;
                         webDriver.Navigate().GoToUrl(step.Param);
                         break;
                     case (StepType.CLICK_BUTTON):
