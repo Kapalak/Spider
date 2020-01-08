@@ -28,7 +28,7 @@
 
         public static IWebDriver CreateSession(ExecutionEnvironment executionEnvironment)
         {
-            _log_.Trace($"Create Session : browser type {executionEnvironment.BrowserType} / GridEnabled {executionEnvironment.GridEnabled} ");
+            _log_.Trace($"Create Session : browser type {executionEnvironment.BrowserType} / GridEnabled {executionEnvironment.GridEnabled} ");            
 
             ChromeOptions chromeOptions = new ChromeOptions();
             chromeOptions.AddArgument(string.Format("--lang={0}", CultureInfo.CurrentCulture));
@@ -40,6 +40,7 @@
 
             var projectOutputDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             var webDriverPath = Path.Combine(projectOutputDirectory, SeleniumConfig.WebDriverLocation);
+            _log_.Trace($"webDriverPath {webDriverPath}");
 
             IWebDriver webDriver = executionEnvironment.GridEnabled ?
                 new RemoteWebDriver(new Uri(SeleniumConfig.SeleniumHubAddress), executionEnvironment.BrowserType == BrowserType.CHROME ? (DriverOptions) chromeOptions : firefoxOptions) :
@@ -184,17 +185,14 @@
                 var chromeLastVersion = await response.Content.ReadAsStringAsync();
 
                 var path = new FileInfo(Assembly.GetEntryAssembly().Location).Directory.ToString();
-                //Directory.GetCurrentDirectory();
                 _log_.Info($"Spider Workdirectory is : {path}");
                 _log_.Info($"Spider Workdirectory is : {path}");
-                //Environment.CurrentDirectory;
-                // Path.GetTempPath();
 
                 _log_.Info($"The last chrome driver: chromeLastVersion / Source {SeleniumConfig.LastChromeDriverVersionUrl}");
                 var zipFile = $"chromedriver_{chromeLastVersion}_win32.zip";
 
                 _log_.Info($"check if {Path.Combine(path, zipFile)} exist");
-                _log_.Info($"check if {Path.Combine(path, "chrome", "chromedriver.exe")} exist");
+                _log_.Info($"check if {Path.Combine(path, SeleniumConfig.WebDriverLocation, "chromedriver.exe")} exist");
                 if (
                     !File.Exists(Path.Combine(path, zipFile)) ||
                     !File.Exists(Path.Combine(path, SeleniumConfig.WebDriverLocation, "chromedriver.exe"))
@@ -219,8 +217,12 @@
                     {
                         File.Delete(Path.Combine(driverDirFullPath, SeleniumConfig.WebDriverLocation));
                     }
-                    _log_.Info($"Unzipping ino {zipFileInfo.FullName}");
+                    _log_.Info($"Unzipping into {zipFileInfo.FullName}");
                     ZipFile.ExtractToDirectory(zipFileInfo.FullName, Path.Combine(zipFileInfo.DirectoryName, SeleniumConfig.WebDriverLocation), System.Text.Encoding.ASCII);
+                }
+                else
+                {
+                    _log_.Info($"{Path.Combine(path, SeleniumConfig.WebDriverLocation, "chromedriver.exe")} already exist");
                 }
             }
         }
@@ -273,6 +275,10 @@
                 _log_.Info($"Unzipping ino {zipFileInfo.FullName}");
                 ZipFile.ExtractToDirectory(zipFileInfo.FullName, Path.Combine(zipFileInfo.DirectoryName, SeleniumConfig.WebDriverLocation), System.Text.Encoding.ASCII);
                 await Task.Delay(1000);
+            }
+            else
+            {
+                _log_.Info($"{Path.Combine(path, SeleniumConfig.WebDriverLocation, "geckodriver.exe")} already exist");
             }
         }
     }
