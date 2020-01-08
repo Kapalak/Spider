@@ -125,6 +125,10 @@
                .As('l', "log-level")
                .WithDescription("\nChoose the log level");
 
+            fluentParser.Setup(arg => arg.SeleniumHubAddress)
+            .As('h', "selenium-hub")
+            .WithDescription("\nChoose the selenium hub");            
+
             fluentParser.SetupHelp("?", "help")
                 .Callback(text => _log_.Info(text));
 

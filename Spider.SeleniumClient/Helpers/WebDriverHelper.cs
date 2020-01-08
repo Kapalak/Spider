@@ -45,10 +45,11 @@
             _log_.Trace($"webDriverPath {webDriverPath}");
 
             IWebDriver webDriver = executionEnvironment.GridEnabled ?
-                new RemoteWebDriver(new Uri(SeleniumConfig.SeleniumHubAddress), executionEnvironment.BrowserType == BrowserType.CHROME ? (DriverOptions) chromeOptions : firefoxOptions) :
+                new RemoteWebDriver(new Uri(executionEnvironment.SeleniumHubAddress), executionEnvironment.BrowserType == BrowserType.CHROME ? (DriverOptions) chromeOptions : firefoxOptions) :
                     executionEnvironment.BrowserType == BrowserType.CHROME ?
                     (IWebDriver)new ChromeDriver(webDriverPath, chromeOptions, TimeSpan.FromSeconds(60)) :
                     (IWebDriver)new FirefoxDriver(webDriverPath, firefoxOptions, TimeSpan.FromSeconds(60));
+           
             return webDriver;
         }
 

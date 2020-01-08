@@ -31,5 +31,7 @@ namespace Spider.Common.Model
 
         public string LogLevelString { get; set; } = "Error";
         public LogLevel LogLevel => LogLevel.FromString(LogLevelString);
+
+        public string SeleniumHubAddress { get; set; } = "http://localhost:4444/wd/hub";
     }
 }

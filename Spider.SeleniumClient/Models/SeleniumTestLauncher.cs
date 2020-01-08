@@ -84,6 +84,7 @@
                         webDriver = WebDriverHelper.CreateSession(executionEnvironment);
                         var sessionId = ((OpenQA.Selenium.Remote.RemoteWebDriver)webDriver).SessionId;
                         webDriver.ResizeWindow(SeleniumConfig.BrowserSize);
+                        _log_.Trace($"Session created : {sessionId.ToString()}");
                         step.SessionId = sessionId.ToString();
                         break;
                     case (StepType.NAVIGATE_URL):
