@@ -27,6 +27,7 @@ namespace Spider.Common.Model
         public string ContextDirectoryLocation { get; set; }
         public string SiteMapDirectoryLocation { get; set; }
         public bool GridEnabled { get; set; }
+        public string BinaryLocation { get; set; }
 
         public string LogLevelString { get; set; } = "Error";
         public LogLevel LogLevel => LogLevel.FromString(LogLevelString);

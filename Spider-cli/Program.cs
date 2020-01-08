@@ -117,6 +117,10 @@
                .As('g', "grid-enabled")
                .WithDescription("\nExecute test on remote selenium grid");
 
+            fluentParser.Setup(arg => arg.BinaryLocation)
+               .As('x', "binary-location")
+               .WithDescription("\nLocation to the browser exe");
+
             fluentParser.Setup(arg => arg.LogLevelString)
                .As('l', "log-level")
                .WithDescription("\nChoose the log level");

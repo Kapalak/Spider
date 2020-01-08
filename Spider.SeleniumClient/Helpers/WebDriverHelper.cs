@@ -33,10 +33,12 @@
             ChromeOptions chromeOptions = new ChromeOptions();
             chromeOptions.AddArgument(string.Format("--lang={0}", CultureInfo.CurrentCulture));
 
-            FirefoxOptions firefoxOptions = new FirefoxOptions
+            FirefoxOptions firefoxOptions = new FirefoxOptions();
+
+            if (executionEnvironment.GridEnabled == false && executionEnvironment.BrowserType == BrowserType.FIREFOX && !string.IsNullOrEmpty(executionEnvironment.BinaryLocation))
             {
-                BrowserExecutableLocation = @"C:\Program Files\Mozilla Firefox\firefox.exe"
-            };
+                firefoxOptions.BrowserExecutableLocation = executionEnvironment.BinaryLocation;
+            }
             
             var path = new FileInfo(Assembly.GetEntryAssembly().Location).Directory.ToString();
             var webDriverPath = Path.Combine(path, SeleniumConfig.WebDriverLocation);
