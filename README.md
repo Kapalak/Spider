@@ -13,9 +13,11 @@ https://github.com/Kapalak/Spider/blob/master/Spider-cli/Sample/SearchWithGoogle
 
 Open Powershell command terminal and run this command
 
-'
+'''powershell
 PS C:\spider> .\Spider-cli.exe -t c:\spider\Testbooks\Simple\SearchWithGoogleSimple.json -o .\results
-'
+'''
+
+
 
 
 
