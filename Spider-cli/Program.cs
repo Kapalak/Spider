@@ -92,7 +92,7 @@
 
             foreach (var test in tests)
             {
-                Console.BackgroundColor = test.Failed ? ConsoleColor.Red : ConsoleColor.Green;
+                Console.ForegroundColor = test.Failed ? ConsoleColor.Red : ConsoleColor.Green;
                 var status = test.Failed ? "Failed" : "Success";
                 Console.WriteLine($"{test.Name} - {status} - [{test.Measure.StartDate} - {test.Measure.EndDate} *****************");
                 if (test.Failed)
