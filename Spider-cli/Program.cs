@@ -5,9 +5,10 @@
     using Spider.Common.Enums;
     using Spider.Common.Model;
     using Spider.SeleniumClient;
-    using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using System;
 
     class Program
     {
@@ -46,34 +47,59 @@
                 if (fluentParser.Object.Tests != null)
                 {
                     var tests = fluentParser.Object.Tests;
+
                     if (fluentParser.Object.ParallelScope == ParallelScope.None)
                     {
                         _log_.Info("Executing tests in series");
+                        List<ITest> testExecutions = new List<ITest>();
                         foreach (var test in tests)
                         {
-                            await ExecuteTestAsync(test, fluentParser.Object);
+                            testExecutions.Add(await ExecuteTestAsync(test, fluentParser.Object));
                         }
+                        WriteTestResults(testExecutions);
                     }
 
                     if (fluentParser.Object.ParallelScope == ParallelScope.All)
                     {
                         _log_.Info("Executing tests in parallel");
-                        List<Task> tasks = new List<Task>();
+                        List<Task<ITest>> tasks = new List<Task<ITest>>();
                         foreach (var test in tests)
                         {
                             tasks.Add(ExecuteTestAsync(test, fluentParser.Object));
                         }
 
                         Task.WaitAll(tasks.ToArray());
+
+                        var testExecutions = tasks.Select(ts => ts.Result);
+
+                        WriteTestResults(testExecutions);
                     }
                 }
+                else
+                {
+                    _log_.Error("Spider-cli: ");
+                    _log_.Error(result.ErrorText);
+                    _log_.Error("Try `Spider-cli.exe --help' for more information.");
+                    return;
+                }
             }
-            else
+        }
+
+        public static void WriteTestResults(IEnumerable<ITest> tests)
+        {
+            Console.WriteLine($"{tests.Where(t => !t.Failed).Count()} successful tests");
+            Console.WriteLine($"{tests.Where(t => t.Failed).Count()} failed tests");
+
+            foreach (var test in tests)
             {
-                _log_.Error("Spider-cli: ");
-                _log_.Error(result.ErrorText);
-                _log_.Error("Try `Spider-cli.exe --help' for more information.");
-                return;
+                Console.BackgroundColor = test.Failed ? ConsoleColor.Red : ConsoleColor.Green;
+                var status = test.Failed ? "Failed" : "Success";
+                Console.WriteLine($"{test.Name} - {status} - [{test.Measure.StartDate} - {test.Measure.EndDate} *****************");
+                if (test.Failed)
+                {
+                    Console.WriteLine($"{test.StackTrace}");
+                }
+                Console.ResetColor();
             }
         }
 
@@ -127,7 +153,7 @@
 
             fluentParser.Setup(arg => arg.SeleniumHubAddress)
             .As('h', "selenium-hub")
-            .WithDescription("\nChoose the selenium hub");            
+            .WithDescription("\nChoose the selenium hub");
 
             fluentParser.SetupHelp("?", "help")
                 .Callback(text => _log_.Info(text));
@@ -136,20 +162,12 @@
 
         }
 
-        private static async Task ExecuteTestAsync(string test, ExecutionEnvironment execEnv)
+        private static async Task<ITest> ExecuteTestAsync(string test, ExecutionEnvironment execEnv)
         {
             _log_.Info("Begin Executing test");
-
             var executionTest = await SeleniumTestLauncher.ExecuteTestFromJsonAsync(test, execEnv);
             _log_.Info($"End Executing {executionTest.Name}");
-            var status = executionTest.Failed ? "Failed" : "Success";
-            Console.ForegroundColor = executionTest.Failed ? ConsoleColor.Red : ConsoleColor.Green;
-            Console.WriteLine($"{test} {status}");
-            Console.ResetColor();
-            Console.WriteLine($"{executionTest.StackTrace}");
-            Console.WriteLine($"{executionTest.Measure.StartDate}");
-            Console.WriteLine($"{executionTest.Measure.EndDate}");
-           
+            return executionTest;
         }
     }
 }
