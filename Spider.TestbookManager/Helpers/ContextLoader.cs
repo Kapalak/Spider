@@ -53,11 +53,10 @@ namespace Spider.TestbookManager.Models
 
         private Context LoadContextFromJson(string contextFolder, string jsonFile)
         {
-            //var projectOutputDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            var fileFullPath = Directory.GetFiles(contextFolder ?? throw new InvalidOperationException()
-                    , $"*{jsonFile}",
-                    SearchOption.AllDirectories).
-                FirstOrDefault();
+            var fileFullPath = Directory.GetFiles(
+                contextFolder ?? throw new Exception($"Context Folder is not defined in this execution: Cannot fetch {jsonFile}")
+                , $"*{jsonFile}"
+                ,SearchOption.AllDirectories).FirstOrDefault();
             Context context = JsonHelper.DeserializeObject<Context>(fileFullPath);
             return context;
         }

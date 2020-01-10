@@ -55,9 +55,10 @@ namespace Spider.TestbookManager.Models
 
         private Scenario LoadScenarioFromJson(string scenarioFolder, string jsonFile)
         {
-            var fileFullPath = Directory.GetFiles(scenarioFolder ?? throw new InvalidOperationException()
-                , $"*{jsonFile}",
-                SearchOption.AllDirectories).
+            var fileFullPath = Directory.GetFiles(
+                scenarioFolder ?? throw new Exception($"Scenario Folder is not defined in this execution: Cannot fetch {jsonFile}")
+                , $"*{jsonFile}"
+                ,SearchOption.AllDirectories).
                 FirstOrDefault();
             Scenario page = JsonHelper.DeserializeObject<Scenario>(fileFullPath);
             return page;
