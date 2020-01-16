@@ -88,7 +88,8 @@
                         step.SessionId = sessionId.ToString();
                         break;
                     case (StepType.NAVIGATE_URL):
-                        webDriver.Navigate().GoToUrl(step.Param);
+                        var url = UrlHelper.Combine(webDriver.Url, step.Param);                        
+                        webDriver.Navigate().GoToUrl(url);
                         break;
                     case (StepType.CLICK_BUTTON):
                         webDriver.SmartClick(step.Selector);
