@@ -29,16 +29,16 @@
             return test;
         }
 
-        public static Test ConvertFromPageObject(this Test test, ExecutionEnvironment execEnv)
+        public static Test ConvertFromPageObject(this Test test, ExecutionEnvironment executionEnvironment)
         {
             foreach (var step in test.Steps)
             {
-                step.ConvertFromPageObject(execEnv);
+                step.ConvertFromPageObject(executionEnvironment);
             }
             return test;
         }
 
-        public static Step ConvertFromPageObject(this Step step, ExecutionEnvironment execEnv)
+        public static Step ConvertFromPageObject(this Step step, ExecutionEnvironment executionEnvironment)
         {
             foreach (var property in step.GetType().GetProperties())
             {
@@ -46,15 +46,12 @@
                 {
                     string value = property.GetValue(step, null)?.ToString();
 
-                    if (value != null && value.StartsWith("#"))
+                    if (value != null && value.StartsWith("#") && value.Contains("."))
                     {                        
                         string[] pathElements = value.Substring(1).Split('.');
                         var pageKey = pathElements[0];
                         string propertyPath = value.Substring(1 + 1 + pageKey.Length);
-                        var page = SiteMap.Instance.GetPage(pageKey, execEnv);
-                        var pageProperties = page.GetType().GetProperties();
-                        var stepProperties = step.GetType().GetProperties();
-                        var currentProperty = stepProperties.FirstOrDefault(p => p.Name == propertyPath);
+                        var page = SiteMap.Instance.GetPage(pageKey, executionEnvironment);
                         var selectorValue = ExpandoHelper.GetDynamicMember(page, propertyPath);
                         if (selectorValue is string)
                         {

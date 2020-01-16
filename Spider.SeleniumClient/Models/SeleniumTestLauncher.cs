@@ -132,17 +132,17 @@
             }
         }
 
-        public static async Task<ITest> ExecuteTestFromJsonAsync(string jsonFile, ExecutionEnvironment execEnv)
+        public static async Task<ITest> ExecuteTestFromJsonAsync(string jsonFile, ExecutionEnvironment executionEnvironment)
         {
             var test = TestBookHelper.ReadTestFromJson(jsonFile);
-            test.ConvertScenarioToElementarySteps(execEnv);
+            test.ConvertScenarioToElementarySteps(executionEnvironment);
             test.InsertScreenshotSteps();
-            test.ConvertFromPageObject(execEnv);
+            test.ConvertFromPageObject(executionEnvironment);
             //to use on debug mode only
             //TestBookHelper.SaveTestToJson(test, $"{test.FilePath.Replace(".json", "-conv.json")}");
-            var sessionId = await test.ExecuteAsync(execEnv);
+            var sessionId = await test.ExecuteAsync(executionEnvironment);
             //TestBookHelper.SaveTestToJson(test, $"{test.FilePath.Replace(".json", "-result.json")}");
-            var outputFile = Path.Combine(execEnv.OutputDirectoryLocation, sessionId, test.FileName.Replace(".json", "-result.json"));
+            var outputFile = Path.Combine(executionEnvironment.OutputDirectoryLocation, sessionId, test.FileName.Replace(".json", "-result.json"));
             TestBookHelper.SaveTestToJson(test, outputFile);
             return test;
         }

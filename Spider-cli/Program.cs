@@ -162,10 +162,10 @@
 
         }
 
-        private static async Task<ITest> ExecuteTestAsync(string test, ExecutionEnvironment execEnv)
+        private static async Task<ITest> ExecuteTestAsync(string test, ExecutionEnvironment executionEnvironment)
         {
             _log_.Info("Begin Executing test");
-            var executionTest = await SeleniumTestLauncher.ExecuteTestFromJsonAsync(test, execEnv);
+            var executionTest = await SeleniumTestLauncher.ExecuteTestFromJsonAsync(test, executionEnvironment);
             _log_.Info($"End Executing {executionTest.Name}");
             return executionTest;
         }
