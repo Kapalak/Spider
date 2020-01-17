@@ -1,17 +1,12 @@
-﻿using Newtonsoft.Json;
+﻿using EO.Pdf;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NLog;
 using Nustache.Core;
-using PdfSharp;
-using PdfSharp.Pdf;
 using Spider.Common.Model;
 using Spider.Reporting.Models;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Reflection;
-using TheArtOfDev.HtmlRenderer.PdfSharp;
 
 namespace Spider.Reporting
 {
@@ -58,18 +53,11 @@ namespace Spider.Reporting
             File.WriteAllText(reportHtmlFileInfo.FullName, renderer);
 
             var reportPdfFileInfo = new FileInfo(Path.Combine(path, "report.pdf"));
-            PdfDocument pdf = PdfGenerator.GeneratePdf(renderer, PageSize.A4);
-            pdf.Save("report.pdf");
+            PdfDocument pdf = new PdfDocument();
+            HtmlToPdf.ConvertHtml(renderer, pdf);
+            pdf.Save(reportPdfFileInfo.FullName);
 
             _log_.Trace($"{reportHtmlFileInfo.FullName} generated");
-            _log_.Trace($"{reportPdfFileInfo.FullName} generated");
         }
-
-        public static void SavPdfDocument(string htmlContent)
-        {
-            PdfDocument pdf = PdfGenerator.GeneratePdf(htmlContent, PageSize.A4);
-            pdf.Save("report.pdf");
-        }
-
     }
 }
