@@ -14,7 +14,7 @@ namespace Spider.Reporting
     {
         public static void GenerateHtmlReport(ExecutionEnvironment executionEnvironment)
         {
-            var path = Path.Combine(".", executionEnvironment.OutputDirectoryLocation);
+            var path = new DirectoryInfo(Path.Combine(".", executionEnvironment.OutputDirectoryLocation)).FullName;
             var files = Directory.GetFiles(path, "*-result.json", SearchOption.AllDirectories);
             List<TestReport> listTestReport = new List<TestReport>();
 
