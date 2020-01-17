@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using NLog;
 using Nustache.Core;
 using Spider.Common.Model;
 using Spider.Reporting.Models;
@@ -12,6 +13,7 @@ namespace Spider.Reporting
 {
     public static class ReportingHelper
     {
+        private static readonly Logger _log_ = LogManager.GetCurrentClassLogger();
         public static void GenerateHtmlReport(ExecutionEnvironment executionEnvironment)
         {
             var path = new DirectoryInfo(Path.Combine(".", executionEnvironment.OutputDirectoryLocation)).FullName;
@@ -50,6 +52,7 @@ namespace Spider.Reporting
 
             var reportFileInfo = new FileInfo(Path.Combine(path, "index.html"));
             File.WriteAllText(reportFileInfo.FullName, renderer);
+            _log_.Trace($"{reportFileInfo.FullName} generated")
             if (executionEnvironment.InteractiveMode)
             {
                 Process.Start("chrome.exe", reportFileInfo.FullName);
