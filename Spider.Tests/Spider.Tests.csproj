@@ -59,15 +59,68 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Reporting\Test1\" />
     <Folder Include="Testbooks\Simple\Contexts\" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Spider.Reporting\Spider.Reporting.csproj" />
     <ProjectReference Include="..\Spider.SeleniumClient\Spider.SeleniumClient.csproj" />
     <ProjectReference Include="..\Spider.Steps\Spider.Steps.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Reporting\Test1\139f97a6489cc420fb95acf4e913a7d4\FirstGoogleSearchTest\FirstGoogleSearchTest_0_1after.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Reporting\Test1\139f97a6489cc420fb95acf4e913a7d4\FirstGoogleSearchTest\FirstGoogleSearchTest_2_0before.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Reporting\Test1\139f97a6489cc420fb95acf4e913a7d4\FirstGoogleSearchTest\FirstGoogleSearchTest_afterClick.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Reporting\Test1\139f97a6489cc420fb95acf4e913a7d4\FirstGoogleSearchTest\FirstGoogleSearchTest_afterSet.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Reporting\Test1\139f97a6489cc420fb95acf4e913a7d4\SearchWithGoogleSimple-result.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Reporting\Test1\3c3db198300e4450395b47da723fa4cb\Images\TAKE_SCREENSHOT1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Reporting\Test1\3c3db198300e4450395b47da723fa4cb\Images\TAKE_SCREENSHOT2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Reporting\Test1\3c3db198300e4450395b47da723fa4cb\Images\TAKE_SCREENSHOT3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Reporting\Test1\3c3db198300e4450395b47da723fa4cb\Images\TAKE_SCREENSHOT4.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Reporting\Test1\3c3db198300e4450395b47da723fa4cb\SearchEcovadisInGoogleWithScenarioAndContext-result.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Reporting\Test1\fea62bee3c0d47e04eb5dae5ef7d73f0\FirstGoogleSearchTest\FirstGoogleSearchTest_0_1after.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Reporting\Test1\fea62bee3c0d47e04eb5dae5ef7d73f0\FirstGoogleSearchTest\FirstGoogleSearchTest_2_0before.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Reporting\Test1\fea62bee3c0d47e04eb5dae5ef7d73f0\FirstGoogleSearchTest\FirstGoogleSearchTest_afterAcceptingCookies.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Reporting\Test1\fea62bee3c0d47e04eb5dae5ef7d73f0\FirstGoogleSearchTest\FirstGoogleSearchTest_afterClick.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Reporting\Test1\fea62bee3c0d47e04eb5dae5ef7d73f0\FirstGoogleSearchTest\FirstGoogleSearchTest_afterSet.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Reporting\Test1\fea62bee3c0d47e04eb5dae5ef7d73f0\SearchWithGoogleSimple-result.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\DefaultTemplate.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Testbooks\Simple\Contexts\HelloTalentAymenContext.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

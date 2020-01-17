@@ -1,0 +1,270 @@
+{
+    "Name": "FirstGoogleSearchTest",
+    "Description": "This Test ...",
+    "Steps": [
+        {
+            "Name": "CREATE_SESSION",
+            "Type": 0,
+            "Description": "This step open the browser",
+            "Param": null,
+            "Value": null,
+            "Page": null,
+            "TakeScreenshotBefore": false,
+            "TakeScreenshotAfter": false,
+            "Selector": null,
+            "SessionId": "139f97a6489cc420fb95acf4e913a7d4",
+            "Measure": {
+                "StartDate": "2020-01-08T17:58:49.6589726+01:00",
+                "EndDate": "2020-01-08T17:58:55.3512747+01:00"
+            },
+            "Failed": false,
+            "StackTrace": null
+        },
+        {
+            "Name": "TAKE_SCREENSHOT",
+            "Type": 12,
+            "Description": "Screenshot after action CREATE_SESSION ",
+            "Param": null,
+            "Value": "FirstGoogleSearchTest\\FirstGoogleSearchTest_0_1after.png",
+            "Page": null,
+            "TakeScreenshotBefore": false,
+            "TakeScreenshotAfter": false,
+            "Selector": null,
+            "SessionId": "139f97a6489cc420fb95acf4e913a7d4",
+            "Measure": {
+                "StartDate": "2020-01-08T17:58:55.3517384+01:00",
+                "EndDate": "2020-01-08T17:58:56.5493966+01:00"
+            },
+            "Failed": false,
+            "StackTrace": null
+        },
+        {
+            "Name": "NAVIGATE_URL",
+            "Type": 1,
+            "Description": "This step open the browser",
+            "Param": "http://www.google.com",
+            "Value": null,
+            "Page": null,
+            "TakeScreenshotBefore": false,
+            "TakeScreenshotAfter": false,
+            "Selector": null,
+            "SessionId": "139f97a6489cc420fb95acf4e913a7d4",
+            "Measure": {
+                "StartDate": "2020-01-08T17:58:56.5497674+01:00",
+                "EndDate": "2020-01-08T17:58:59.911869+01:00"
+            },
+            "Failed": false,
+            "StackTrace": null
+        },
+        {
+            "Name": "TAKE_SCREENSHOT",
+            "Type": 12,
+            "Description": "Screenshot before action NAVIGATE_URL www.google.com",
+            "Param": null,
+            "Value": "FirstGoogleSearchTest\\FirstGoogleSearchTest_2_0before.png",
+            "Page": null,
+            "TakeScreenshotBefore": false,
+            "TakeScreenshotAfter": false,
+            "Selector": null,
+            "SessionId": "139f97a6489cc420fb95acf4e913a7d4",
+            "Measure": {
+                "StartDate": "2020-01-08T17:58:59.91228+01:00",
+                "EndDate": "2020-01-08T17:59:00.7679344+01:00"
+            },
+            "Failed": false,
+            "StackTrace": null
+        },
+        {
+            "Name": "SET_TEXT",
+            "Type": 3,
+            "Description": "Write Ecovadis on the search input",
+            "Param": null,
+            "Value": "Ecovadis",
+            "Page": null,
+            "TakeScreenshotBefore": false,
+            "TakeScreenshotAfter": false,
+            "Selector": {
+                "Key": "SearchInput",
+                "Name": "Rechercher input",
+                "Description": "set a text in this input",
+                "Type": "XPATH",
+                "SelectorType": 0,
+                "Text": "//input[@title='Rechercher'] | //input[@name='q']",
+                "Args": null
+            },
+            "SessionId": "139f97a6489cc420fb95acf4e913a7d4",
+            "Measure": {
+                "StartDate": "2020-01-08T17:59:00.7683665+01:00",
+                "EndDate": "2020-01-08T17:59:03.6076866+01:00"
+            },
+            "Failed": false,
+            "StackTrace": null
+        },
+        {
+            "Name": "TAKE_SCREENSHOT",
+            "Type": 12,
+            "Description": "Screenshot after action NAVIGATE_URL www.google.com",
+            "Param": null,
+            "Value": "FirstGoogleSearchTest\\FirstGoogleSearchTest_afterSet.png",
+            "Page": null,
+            "TakeScreenshotBefore": false,
+            "TakeScreenshotAfter": false,
+            "Selector": null,
+            "SessionId": "139f97a6489cc420fb95acf4e913a7d4",
+            "Measure": {
+                "StartDate": "2020-01-08T17:59:03.6080874+01:00",
+                "EndDate": "2020-01-08T17:59:04.5467829+01:00"
+            },
+            "Failed": false,
+            "StackTrace": null
+        },
+        {
+            "Name": "CLICK_BUTTON",
+            "Type": 2,
+            "Description": "click on the search button",
+            "Param": null,
+            "Value": null,
+            "Page": null,
+            "TakeScreenshotBefore": false,
+            "TakeScreenshotAfter": false,
+            "Selector": {
+                "Key": null,
+                "Name": null,
+                "Description": null,
+                "Type": "XPATH",
+                "SelectorType": 0,
+                "Text": "//input[(@name='btnK')][@type='submit']",
+                "Args": null
+            },
+            "SessionId": "139f97a6489cc420fb95acf4e913a7d4",
+            "Measure": {
+                "StartDate": "2020-01-08T17:59:04.5472892+01:00",
+                "EndDate": "2020-01-08T17:59:09.5836439+01:00"
+            },
+            "Failed": false,
+            "StackTrace": null
+        },
+        {
+            "Name": "TAKE_SCREENSHOT",
+            "Type": 12,
+            "Description": "Screenshot after action NAVIGATE_URL www.google.com",
+            "Param": null,
+            "Value": "FirstGoogleSearchTest\\FirstGoogleSearchTest_afterClick.png",
+            "Page": null,
+            "TakeScreenshotBefore": false,
+            "TakeScreenshotAfter": false,
+            "Selector": null,
+            "SessionId": "139f97a6489cc420fb95acf4e913a7d4",
+            "Measure": {
+                "StartDate": "2020-01-08T17:59:09.5840138+01:00",
+                "EndDate": "2020-01-08T17:59:10.6056105+01:00"
+            },
+            "Failed": false,
+            "StackTrace": null
+        },
+        {
+            "Name": "ASSERT_EXISTS",
+            "Type": 5,
+            "Description": "Assert ecovadis.com is first search result",
+            "Param": null,
+            "Value": null,
+            "Page": null,
+            "TakeScreenshotBefore": false,
+            "TakeScreenshotAfter": false,
+            "Selector": {
+                "Key": null,
+                "Name": null,
+                "Description": null,
+                "Type": "XPATH",
+                "SelectorType": 0,
+                "Text": "//*[@id='rso']/div[1]/div/div/div/div/div[1]/a[contains(@href,'ecovadis.com')]",
+                "Args": null
+            },
+            "SessionId": "139f97a6489cc420fb95acf4e913a7d4",
+            "Measure": {
+                "StartDate": "2020-01-08T17:59:10.6060139+01:00",
+                "EndDate": "2020-01-08T17:59:12.0422617+01:00"
+            },
+            "Failed": false,
+            "StackTrace": null
+        },
+        {
+            "Name": "CLICK_BUTTON",
+            "Type": 2,
+            "Description": "click on the first search result",
+            "Param": null,
+            "Value": null,
+            "Page": null,
+            "TakeScreenshotBefore": false,
+            "TakeScreenshotAfter": false,
+            "Selector": {
+                "Key": null,
+                "Name": null,
+                "Description": null,
+                "Type": "XPATH",
+                "SelectorType": 0,
+                "Text": "//*[@id='rso']/div[1]/div/div/div/div/div[1]/a[@href='https://www.ecovadis.com/']",
+                "Args": null
+            },
+            "SessionId": "139f97a6489cc420fb95acf4e913a7d4",
+            "Measure": {
+                "StartDate": "2020-01-08T17:59:12.0427597+01:00",
+                "EndDate": "0001-01-01T00:00:00"
+            },
+            "Failed": true,
+            "StackTrace": "No element to return with this selector //*[@id='rso']/div[1]/div/div/div/div/div[1]/a[@href='https://www.ecovadis.com/']"
+        },
+        {
+            "Name": "CLICK_BUTTON",
+            "Type": 2,
+            "Description": "click on accept cookie button",
+            "Param": null,
+            "Value": null,
+            "Page": null,
+            "TakeScreenshotBefore": false,
+            "TakeScreenshotAfter": false,
+            "Selector": {
+                "Key": null,
+                "Name": null,
+                "Description": null,
+                "Type": "XPATH",
+                "SelectorType": 0,
+                "Text": "//a[@class='optanon-allow-all']",
+                "Args": null
+            },
+            "SessionId": null,
+            "Measure": {
+                "StartDate": "0001-01-01T00:00:00",
+                "EndDate": "0001-01-01T00:00:00"
+            },
+            "Failed": false,
+            "StackTrace": null
+        },
+        {
+            "Name": "TAKE_SCREENSHOT",
+            "Type": 12,
+            "Description": "Screenshot after action accepting cookies",
+            "Param": null,
+            "Value": "FirstGoogleSearchTest\\FirstGoogleSearchTest_afterAcceptingCookies.png",
+            "Page": null,
+            "TakeScreenshotBefore": false,
+            "TakeScreenshotAfter": false,
+            "Selector": null,
+            "SessionId": null,
+            "Measure": {
+                "StartDate": "0001-01-01T00:00:00",
+                "EndDate": "0001-01-01T00:00:00"
+            },
+            "Failed": false,
+            "StackTrace": null
+        }
+    ],
+    "FileName": "SearchWithGoogleSimple.json",
+    "FilePath": "C:\\source\\AutomatedWebTests\\SampleTests\\SearchWithGoogleSimple.json",
+    "Measure": {
+        "StartDate": "2020-01-08T17:58:49.650461+01:00",
+        "EndDate": "2020-01-08T17:59:13.0890317+01:00"
+    },
+    "Failed": true,
+    "StackTrace": "FirstGoogleSearchTest : No element to return with this selector //*[@id='rso']/div[1]/div/div/div/div/div[1]/a[@href='https://www.ecovadis.com/']"
+}

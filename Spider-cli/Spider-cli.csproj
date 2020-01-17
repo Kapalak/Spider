@@ -15,7 +15,14 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Spider.Common\Spider.Common.csproj" />
+    <ProjectReference Include="..\Spider.Reporting\Spider.Reporting.csproj" />
     <ProjectReference Include="..\Spider.SeleniumClient\Spider.SeleniumClient.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Templates\DefaultTemplate.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

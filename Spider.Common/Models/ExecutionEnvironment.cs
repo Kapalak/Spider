@@ -22,11 +22,12 @@ namespace Spider.Common.Model
         public ParallelScope ParallelScope => (ParallelScope)Enum.Parse(typeof(ParallelScope), value: ParallelScopeString, true);
 
         public string OutputDirectoryLocation { get; set; } = "results";
-
+        public string ReportTemplate { get; set; } = @"Templates\DefaultTemplate.html";
         public string ScenarioDirectoryLocation { get; set; }
         public string ContextDirectoryLocation { get; set; }
         public string SiteMapDirectoryLocation { get; set; }
         public bool GridEnabled { get; set; }
+        public bool InteractiveMode { get; set; }
         public string BinaryLocation { get; set; }
 
         public string LogLevelString { get; set; } = "Error";

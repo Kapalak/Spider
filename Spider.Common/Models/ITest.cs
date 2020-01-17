@@ -1,12 +1,16 @@
-﻿namespace Spider.Common.Model
+﻿using System.Collections.Generic;
+
+namespace Spider.Common.Model
 {
     public interface ITest
     {
+        string Description { get; set; }
+        bool Failed { get; set; }
+        string FileName { get; set; }
+        string FilePath { get; set; }
+        IMeasure Measure { get; }
         string Name { get; set; }
         string StackTrace { get; set; }
-        bool Failed { get; set; }
-
-        IMeasure Measure { get; }
-
+        //List<IStep> Steps { get; set; }
     }
 }

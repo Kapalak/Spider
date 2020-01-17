@@ -3,7 +3,7 @@
     using Spider.Common.Enums;
     using System;
 
-    public class Step
+    public class Step : IStep
     {
         public string Name { get; set; }
 

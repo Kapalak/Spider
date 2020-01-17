@@ -9,6 +9,9 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System;
+    using Spider.Reporting;
+    using System.Diagnostics;
+    using System.IO;
 
     class Program
     {
@@ -57,6 +60,7 @@
                             testExecutions.Add(await ExecuteTestAsync(test, fluentParser.Object));
                         }
                         WriteTestResults(testExecutions);
+                        ReportingHelper.GenerateHtmlReport(fluentParser.Object.OutputDirectoryLocation, fluentParser.Object);
                     }
 
                     if (fluentParser.Object.ParallelScope == ParallelScope.All)
@@ -73,6 +77,7 @@
                         var testExecutions = tasks.Select(ts => ts.Result);
 
                         WriteTestResults(testExecutions);
+                        ReportingHelper.GenerateHtmlReport(fluentParser.Object.OutputDirectoryLocation, fluentParser.Object);
                     }
                 }
                 else
@@ -140,8 +145,12 @@
                 .WithDescription("\nDefine the sitemap directory");
 
             fluentParser.Setup(arg => arg.GridEnabled)
-               .As('g', "grid-enabled")
-               .WithDescription("\nExecute test on remote selenium grid");
+                 .As('g', "grid-enabled")
+              .WithDescription("\nExecute test on remote selenium grid");
+
+            fluentParser.Setup(arg => arg.InteractiveMode)
+              .As('i', "interactive-mode")
+               .WithDescription("\nEnable interactive mode (display report after execution)");
 
             fluentParser.Setup(arg => arg.BinaryLocation)
                .As('x', "binary-location")

@@ -8,25 +8,15 @@
 
         public string Description { get; set; }
 
-        List<Step> _steps;
-        public List<Step> Steps
-        {
-            get
-            {
-                if (_steps == null)
-                {
-                    _steps = new List<Step>();
-                }
-                return _steps;
-            }
-        }
+        public List<Step> Steps { get; set; } = new List<Step>();
         
         //add serialization ignore
         public string FileName { get; set; }
         public string FilePath { get; set; }
 
         private IMeasure _measure = new Measure();
-        public IMeasure Measure {
+        public IMeasure Measure
+        {
             get
             {
                 if (_measure == null)

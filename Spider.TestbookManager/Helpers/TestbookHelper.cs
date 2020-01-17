@@ -33,7 +33,7 @@
         {
             foreach (var step in test.Steps)
             {
-                step.ConvertFromPageObject(executionEnvironment);
+                ((Step)step).ConvertFromPageObject(executionEnvironment);
             }
             return test;
         }
@@ -92,7 +92,7 @@
                 if (test.Steps[index].Type == StepType.EXECUTE_SCENARIO)
                 {
                     _log_.Trace($"Convert complex test steps to elementary test steps {test.Steps[index].Name}");
-                    var elementarySteps = test.Steps[index].ConvertScenarioToElementarySteps(executionEnvironment);
+                    var elementarySteps = ((Step)test.Steps[index]).ConvertScenarioToElementarySteps(executionEnvironment);
                     var contextToApply = ContextLoader.Instance.GetContext(test.Steps[index].Value, executionEnvironment.ContextDirectoryLocation);
                     elementarySteps.ForEach(s => s.ApplyScenarioContext(contextToApply));
                     test.Steps.Remove(test.Steps[index]);
@@ -134,7 +134,7 @@
 
         public static Test InsertScreenshotSteps(this Test test)
         {
-            var steps = new List<Step>(test.Steps);
+            var steps = new List<IStep>(test.Steps);
             int insertionIndex = 0;
             for (int index = 0; index < steps.Count; index++)
             {

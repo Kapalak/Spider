@@ -1,0 +1,40 @@
+﻿<html>
+<head>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Steps</th>
+            </tr>
+
+        </thead>
+        <tbody>
+            {{#Reports}}
+            <tr>
+                <td>{{Name}}</td>
+                <td>{{Status}}</td>
+                <td>
+                    <table style="border: 1px solid black;">
+                        <tr>
+                            <th>Name</th>
+                            <th>Status</th>
+                            <th>Screenshot</th>
+                        </tr>
+                        {{#Steps}}
+                        <tr>
+                            <td>{{Name}}</td>
+                            <td>{{Status}}</td>
+                            <td>  {{#ImageBase64}} <img src="data:image/png;base64, {{ImageBase64}}" width="50" height="50" />  {{/ImageBase64}}</td>
+                        </tr>
+                        {{/Steps}}
+                    </table>
+                </td>                
+            </tr>
+            {{/Reports}}
+        </tbody>
+    </table>
+</body>
+</html>
