@@ -1,4 +1,4 @@
-﻿using EO.Pdf;
+﻿//using EO.Pdf;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NLog;
@@ -52,10 +52,12 @@ namespace Spider.Reporting
             var reportHtmlFileInfo = new FileInfo(Path.Combine(path, "index.html"));
             File.WriteAllText(reportHtmlFileInfo.FullName, renderer);
 
+            /*
             var reportPdfFileInfo = new FileInfo(Path.Combine(path, "report.pdf"));
             PdfDocument pdf = new PdfDocument();
             HtmlToPdf.ConvertHtml(renderer, pdf);
             pdf.Save(reportPdfFileInfo.FullName);
+            */
 
             _log_.Trace($"{reportHtmlFileInfo.FullName} generated");
         }
