@@ -14,7 +14,7 @@ namespace Spider.Reporting
     {
         public static void GenerateHtmlReport(string resultfolder, ExecutionEnvironment executionEnvironment)
         {
-            var htmlFile = File.ReadAllText(executionEnvironment.ReportTemplate);
+            var htmlFile = File.ReadAllText(Path.Combine(., executionEnvironment.ReportTemplate));
 
             var files = Directory.GetFiles(resultfolder, "*-result.json", SearchOption.AllDirectories);
             List<TestReport> listTestReport = new List<TestReport>();
