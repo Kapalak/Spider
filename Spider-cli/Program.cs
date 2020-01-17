@@ -60,7 +60,7 @@
                             testExecutions.Add(await ExecuteTestAsync(test, fluentParser.Object));
                         }
                         WriteTestResults(testExecutions);
-                        ReportingHelper.GenerateHtmlReport(fluentParser.Object.OutputDirectoryLocation, fluentParser.Object);
+                        ReportingHelper.GenerateHtmlReport(fluentParser.Object);
                     }
 
                     if (fluentParser.Object.ParallelScope == ParallelScope.All)
@@ -77,7 +77,7 @@
                         var testExecutions = tasks.Select(ts => ts.Result);
 
                         WriteTestResults(testExecutions);
-                        ReportingHelper.GenerateHtmlReport(fluentParser.Object.OutputDirectoryLocation, fluentParser.Object);
+                        ReportingHelper.GenerateHtmlReport(fluentParser.Object);
                     }
                 }
                 else

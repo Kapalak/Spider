@@ -12,9 +12,10 @@ namespace Spider.Reporting
 {
     public static class ReportingHelper
     {
-        public static void GenerateHtmlReport(string resultfolder, ExecutionEnvironment executionEnvironment)
+        public static void GenerateHtmlReport(ExecutionEnvironment executionEnvironment)
         {
-            var files = Directory.GetFiles(resultfolder, "*-result.json", SearchOption.AllDirectories);
+            var path = Path.Combine(".", executionEnvironment.OutputDirectoryLocation);
+            var files = Directory.GetFiles(path, "*-result.json", SearchOption.AllDirectories);
             List<TestReport> listTestReport = new List<TestReport>();
 
             foreach (var file in files)
@@ -47,7 +48,7 @@ namespace Spider.Reporting
                 Reports = listTestReport
             });
 
-            var reportFileInfo = new FileInfo(Path.Combine(".", resultfolder, "index.html"));
+            var reportFileInfo = new FileInfo(Path.Combine(path, "index.html"));
             File.WriteAllText(reportFileInfo.FullName, renderer);
             if (executionEnvironment.InteractiveMode)
             {
