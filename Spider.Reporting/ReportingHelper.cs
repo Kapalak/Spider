@@ -42,14 +42,12 @@ namespace Spider.Reporting
                 }
             }
 
-
             var renderer = Render.FileToString(Path.Combine(".", executionEnvironment.ReportTemplate), new
             {
                 Reports = listTestReport
             });
 
-            var path = new FileInfo(Assembly.GetEntryAssembly().Location).Directory.ToString();
-            var reportFileInfo = new FileInfo(Path.Combine(path, resultfolder, "index.html"));
+            var reportFileInfo = new FileInfo(Path.Combine(".", resultfolder, "index.html"));
             File.WriteAllText(reportFileInfo.FullName, renderer);
             if (executionEnvironment.InteractiveMode)
             {
@@ -57,9 +55,4 @@ namespace Spider.Reporting
             }
         }
     }
-
-
-
-    
-
 }
