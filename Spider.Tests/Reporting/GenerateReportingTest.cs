@@ -13,7 +13,7 @@
         public void GenerateReport_CreateIndexFile()
         {
             var resultFolder = @"Reporting\Test1";
-            ReportingHelper.GenerateHtmlReport(resultFolder, @"Templates\DefaultTemplate.html");
+            ReportingHelper.GenerateHtmlReport(resultFolder, new ExecutionEnvironment());
             Assert.IsTrue(File.Exists(Path.Combine(resultFolder, "index.html")));
         }        
     }
