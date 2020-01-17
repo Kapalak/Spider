@@ -6,6 +6,7 @@ using Spider.Reporting.Models;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 
 namespace Spider.Reporting
 {
@@ -49,7 +50,8 @@ namespace Spider.Reporting
                 Reports = listTestReport
             });
 
-            var reportFileInfo = new FileInfo(Path.Combine(resultfolder, "index.html"));
+            var path = new FileInfo(Assembly.GetEntryAssembly().Location).Directory.ToString();
+            var reportFileInfo = new FileInfo(Path.Combine(path, resultfolder, "index.html"));
             File.WriteAllText(reportFileInfo.FullName, renderer);
             if (executionEnvironment.InteractiveMode)
             {
