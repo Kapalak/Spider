@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NLog;
 using Nustache.Core;
+using OpenHtmlToPdf;
 using Spider.Common.Model;
 using Spider.Reporting.Models;
 using System.Collections.Generic;
@@ -51,6 +52,10 @@ namespace Spider.Reporting
 
             var reportHtmlFileInfo = new FileInfo(Path.Combine(path, "index.html"));
             File.WriteAllText(reportHtmlFileInfo.FullName, renderer);
+
+            var reportPdfFileInfo = new FileInfo(Path.Combine(path, "report.pdf"));
+            var pdfContent = Pdf.From(renderer).Portrait().Content();
+            File.WriteAllBytes(reportPdfFileInfo.FullName, pdfContent);
 
             /*
             var reportPdfFileInfo = new FileInfo(Path.Combine(path, "report.pdf"));
