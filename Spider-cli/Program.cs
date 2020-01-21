@@ -132,6 +132,10 @@
                 .As('o', "output-directory")
                 .WithDescription("\nDefine the output directory");
 
+            fluentParser.Setup(arg => arg.ReportTemplate)
+                .As('r', "report-template")
+                .WithDescription("\nDefine the report template");            
+
             fluentParser.Setup(arg => arg.ContextDirectoryLocation)
                 .As('c', "contexts-directory")
                 .WithDescription("\nDefine the context directory");
