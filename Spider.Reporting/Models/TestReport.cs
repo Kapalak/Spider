@@ -9,7 +9,7 @@
         {
             get
             {
-                return Failed ? "Failed" : "Success";
+                return Failed.HasValue && Failed.Value ? "Failed" : (Failed.HasValue && !Failed.Value ? "Success" : "Skipped");
             }
         }
     }

@@ -5,7 +5,7 @@ namespace Spider.Common.Model
     public interface ITest
     {
         string Description { get; set; }
-        bool Failed { get; set; }
+        bool? Failed { get; set; }
         string FileName { get; set; }
         string FilePath { get; set; }
         IMeasure Measure { get; }

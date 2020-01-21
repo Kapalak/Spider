@@ -92,15 +92,15 @@
 
         public static void WriteTestResults(IEnumerable<ITest> tests)
         {
-            Console.WriteLine($"{tests.Where(t => !t.Failed).Count()} successful tests");
-            Console.WriteLine($"{tests.Where(t => t.Failed).Count()} failed tests");
+            Console.WriteLine($"{tests.Where(t => !(t.Failed.HasValue && t.Failed.Value)).Count()} successful tests");
+            Console.WriteLine($"{tests.Where(t => (t.Failed.HasValue && t.Failed.Value)).Count()} failed tests");
 
             foreach (var test in tests)
             {
-                Console.ForegroundColor = test.Failed ? ConsoleColor.Red : ConsoleColor.Green;
-                var status = test.Failed ? "Failed" : "Success";
+                Console.ForegroundColor = (test.Failed.HasValue && test.Failed.Value) ? ConsoleColor.Red : ConsoleColor.Green;
+                var status = (test.Failed.HasValue && test.Failed.Value) ? "Failed" : "Success";
                 Console.WriteLine($"{test.Name} - {status} - [{test.Measure.StartDate} - {test.Measure.EndDate} *****************");
-                if (test.Failed)
+                if (test.Failed.HasValue && test.Failed.Value)
                 {
                     Console.WriteLine($"{test.StackTrace}");
                 }

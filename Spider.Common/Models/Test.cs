@@ -27,7 +27,7 @@
             }
         }
 
-        public bool Failed { get; set; }
+        public bool? Failed { get; set; }
         public string StackTrace { get; set; }
     }
 }

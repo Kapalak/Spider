@@ -5,7 +5,7 @@ namespace Spider.Common.Model
     public interface IStep
     {
         string Description { get; set; }
-        bool Failed { get; set; }
+        bool? Failed { get; set; }
         Measure Measure { get; }
         string Name { get; set; }
         string Page { get; set; }
