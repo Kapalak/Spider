@@ -78,7 +78,7 @@
             try
             {
                 step.Measure.StartDate = DateTime.Now;
-                _log_.Trace($"Begin Executing Step {step.Name} | {step.Measure.StartDate}");
+                _log_.Trace($"Begin Executing Step {step.Name} | {step.Param}| {step.Value} | {step.Measure.StartDate}");
                 switch (step.Type)
                 {
                     case (StepType.CREATE_SESSION):
