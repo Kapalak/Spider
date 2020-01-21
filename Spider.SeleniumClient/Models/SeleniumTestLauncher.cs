@@ -50,8 +50,9 @@
                     if (sessionId != step.SessionId)
                     {
                         sessionId = step.SessionId;
-                    }
+                    }                   
                 }
+                test.Failed = false;
             }
             catch (Exception ex)
             {
@@ -123,10 +124,12 @@
 
                 }
                 step.Measure.EndDate = DateTime.Now;
+                step.Failed = false;
                 _log_.Trace($"End Executing Step {step.Name} | {step.Measure.StartDate} - {step.Measure.EndDate}");
             }
             catch (Exception ex)
             {
+                _log_.Trace($"End Executing Step with failure {step.Name} | {ex.Message}");
                 step.Failed = true;
                 step.StackTrace = ex.Message;
                 throw ex;
