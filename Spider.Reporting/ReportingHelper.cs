@@ -16,6 +16,12 @@ namespace Spider.Reporting
         private static readonly Logger _log_ = LogManager.GetCurrentClassLogger();
         public static void GenerateHtmlReport(ExecutionEnvironment executionEnvironment)
         {
+            if (!File.Exists(executionEnvironment.ReportTemplate))
+            {
+                _log_.Warn($"Cannot find report template {executionEnvironment.ReportTemplate}. Please Add a report template and pass it as a parameter to get reports.");
+                return;
+            }
+
             var path = new DirectoryInfo(Path.Combine(".", executionEnvironment.OutputDirectoryLocation)).FullName;
             var files = Directory.GetFiles(path, "*-result.json", SearchOption.AllDirectories);
             List<TestReport> listTestReport = new List<TestReport>();
