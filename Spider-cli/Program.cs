@@ -126,6 +126,10 @@
         {
             var fluentParser = new FluentCommandLineParser<ExecutionEnvironment>();
 
+            fluentParser.Setup(arg => arg.Title)
+                .As('e', "title")
+                .WithDescription("\nSelected tests to be ran");
+
             fluentParser.Setup(arg => arg.Tests)
                 .As('t', "tests")
                 .WithDescription("\nSelected tests to be ran");

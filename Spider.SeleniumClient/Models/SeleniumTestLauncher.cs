@@ -26,6 +26,7 @@
 
         public static async Task<string> ExecuteAsync(this Test test, ExecutionEnvironment executionEnvironment)
         {
+            test.Title = executionEnvironment.Title;
             test.Measure.StartDate = DateTime.Now;
             _log_.Trace($"Begin Executing test {test.Name} | {test.Measure.StartDate}");
             string sessionId = string.Empty;

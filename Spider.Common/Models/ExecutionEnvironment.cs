@@ -10,6 +10,7 @@ namespace Spider.Common.Model
         /// <summary>
         /// Specify the selected test file path.
         /// </summary>
+        public string Title { get; set; }
         public List<string> Tests { get; set; }
 
         /// <summary>
