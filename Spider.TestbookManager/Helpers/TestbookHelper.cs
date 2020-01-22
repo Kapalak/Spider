@@ -130,6 +130,14 @@
                 step.Value = contextValue;
                 _log_.Trace($"Replacing Scenario Context {step.Name} / {step.Value} / {contextValue}");
             }
+            var param = step.Param;
+            if (param != null && param.StartsWith("$"))
+            {
+                string propertyPath = param.Substring(1);
+                var contextValue = (string)ExpandoHelper.GetDynamicMember(context, propertyPath);
+                step.Param = contextValue;
+                _log_.Trace($"Replacing Scenario Context {step.Name} / {step.Param} / {contextValue}");
+            }
         }
 
         public static Test InsertScreenshotSteps(this Test test)
