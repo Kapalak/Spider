@@ -1,1 +1,86 @@
-{ "Name": "First Test", "Description": "This Test ...", "Steps": [ { "Name": "CREATE_SESSION", "Type": "CREATE_SESSION", "Description": "This step open the browser" }, { "Name": "TAKE_SCREENSHOT", "Type": "TAKE_SCREENSHOT", "Description": "Screenshot after action CREATE_SESSION ", "Value": "FirstGoogleSearchTest\\TAKE_SCREENSHOT1.png" }, { "Name": "NAVIGATE_URL", "Type": "NAVIGATE_URL", "Description": "This step open the browser", "Param": "http://www.google.com" }, { "Name": "TAKE_SCREENSHOT", "Type": "TAKE_SCREENSHOT", "Description": "Screenshot before action NAVIGATE_URL www.google.com", "Value": "FirstGoogleSearchTest\\TAKE_SCREENSHOT2.png" }, { "Name": "SET_TEXT", "Type": "SET_TEXT", "Description": "Write Ecovadis on the search input", "Value": "Ecovadis", "Selector": { "Key": "SearchInput", "Name": "Rechercher input", "Description": "set a text in this input", "Type": "XPATH", "SelectorType": "XPATH", "Text": "//input[@title='Rechercher'] | //input[@name='q']", "Args": null } }, { "Name": "TAKE_SCREENSHOT", "Type": "TAKE_SCREENSHOT", "Description": "Screenshot after action NAVIGATE_URL www.google.com", "Value": "FirstGoogleSearchTest\\TAKE_SCREENSHOT3.png" }, { "Name": "CLICK_BUTTON", "Type": "CLICK_BUTTON", "Description": "click on the search button", "Selector": { "Type": "XPATH", "SelectorType": "XPATH", "Text": "//input[(@name='btnK')][@type='submit']" } }, { "Name": "TAKE_SCREENSHOT", "Type": "TAKE_SCREENSHOT", "Description": "Screenshot after action NAVIGATE_URL www.google.com", "Value": "FirstGoogleSearchTest\\TAKE_SCREENSHOT4.png" }, { "Name": "ASSERT_EXISTS", "Type": "ASSERT_EXISTS", "Description": "Assert ecovadis.com is first search result", "Selector": { "Type": "XPATH", "SelectorType": "XPATH", "Text": "//*[@id='rso']/div[1]/div/div/div/div/div[1]/a[contains(@href,'ecovadis.com')]" } }, { "Name": "CLICK_BUTTON", "Type": "CLICK_BUTTON", "Description": "click on the first search result", "Selector": { "Type": "XPATH", "SelectorType": "XPATH", "Text": "//*[@id='rso']/div[1]/div/div/div/div/div[1]/a[contains(@href,'ecovadis.com')]" } }, { "Name": "CLICK_BUTTON", "Type": "CLICK_BUTTON", "Description": "click on accept cookie button", "Selector": { "Type": "XPATH", "SelectorType": "XPATH", "Text": "//a[@class='optanon-allow-all']" } }, { "Name": "TAKE_SCREENSHOT", "Type": "TAKE_SCREENSHOT", "Description": "Screenshot after action accepting cookies", "Value": "FirstGoogleSearchTest\\TAKE_SCREENSHOT51.png" } ], "FileName": "FirstTest.json" }
+{ 
+  "Name": "First Test", 
+  "Description": "This Test ...", 
+  "Steps": [ 
+    { 
+      "Name": "CREATE_SESSION", "Type": "CREATE_SESSION", "Description": "This step open the browser" 
+    }, 
+    { 
+      "Name": "TAKE_SCREENSHOT", "Type": "TAKE_SCREENSHOT", 
+      "Description": "Screenshot after action CREATE_SESSION ", 
+      "Value": "FirstGoogleSearchTest\\TAKE_SCREENSHOT1.png" 
+    }, 
+    { 
+      "Name": "NAVIGATE_URL", "Type": "NAVIGATE_URL", 
+      "Description": "This step open the browser", 
+      "Param": "http://www.google.com"
+    }, 
+    { 
+      "Name": "TAKE_SCREENSHOT", 
+      "Type": "TAKE_SCREENSHOT", "Description": 
+      "Screenshot before action NAVIGATE_URL www.google.com", 
+      "Value": "FirstGoogleSearchTest\\TAKE_SCREENSHOT2.png" 
+    }, 
+    { 
+      "Name": "SET_TEXT", "Type": "SET_TEXT", 
+      "Description": "Write Ecovadis on the search input", 
+      "Value": "Ecovadis", 
+      "Selector": { 
+        "Key": "SearchInput", 
+        "Name": "Rechercher input", 
+        "Description": "set a text in this input", 
+        "Type": "XPATH", 
+        "SelectorType": "XPATH", 
+        "Text": "//input[@title='Rechercher'] | //input[@name='q']", "Args": null
+      } 
+    }, 
+    { 
+      "Name": "TAKE_SCREENSHOT",
+      "Type": "TAKE_SCREENSHOT", 
+      "Description": "Screenshot after action NAVIGATE_URL www.google.com", 
+      "Value": "FirstGoogleSearchTest\\TAKE_SCREENSHOT3.png" 
+    }, 
+    { 
+      "Name": "CLICK_BUTTON", 
+      "Type": "CLICK_BUTTON", 
+      "Description": "click on the search button", 
+      "Selector": 
+      { 
+        "Type": "XPATH", "SelectorType": "XPATH", 
+        "Text": "//input[(@name='btnK')][@type='submit']" 
+      } 
+    }, 
+    { 
+      "Name": "TAKE_SCREENSHOT", 
+      "Type": "TAKE_SCREENSHOT", 
+      "Description": "Screenshot after action NAVIGATE_URL www.google.com", 
+      "Value": "FirstGoogleSearchTest\\TAKE_SCREENSHOT4.png" 
+    }, 
+    { 
+      "Name": "ASSERT_EXISTS", "Type": "ASSERT_EXISTS", 
+      "Description": "Assert ecovadis.com is first search result", 
+      "Selector": { 
+        "Type": "XPATH", 
+        "SelectorType": "XPATH", 
+        "Text": "//*[@id='rso']/div[1]/div/div/div/div/div[1]/a[contains(@href,'ecovadis.com')]" 
+      } 
+    }, 
+    { 
+      "Name": "CLICK_BUTTON", 
+      "Type": "CLICK_BUTTON", 
+      "Description": "click on the first search result", 
+      "Selector": { "Type": "XPATH", "SelectorType": "XPATH", "Text": "//*[@id='rso']/div[1]/div/div/div/div/div[1]/a[contains(@href,'ecovadis.com')]" } 
+    }, 
+    { 
+      "Name": "CLICK_BUTTON", "Type": "CLICK_BUTTON", "Description": "click on accept cookie button", 
+      "Selector": { "Type": "XPATH", "SelectorType": "XPATH", "Text": "//a[@class='optanon-allow-all']" 
+                  } 
+    }, 
+    { 
+      "Name": "TAKE_SCREENSHOT", "Type": "TAKE_SCREENSHOT", 
+      "Description": "Screenshot after action accepting cookies", 
+      "Value": "FirstGoogleSearchTest\\TAKE_SCREENSHOT51.png" 
+    } 
+  ], 
+  "FileName": "FirstTest.json" 
+}
