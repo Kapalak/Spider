@@ -11,7 +11,7 @@
         {
             get
             {
-                return Failed.HasValue && Failed.Value ? "Failed" : (Failed.HasValue && !Failed.Value ? "Success" : "Skipped");
+                return Failed.HasValue && Failed.Value ? "Failed" : (Failed.HasValue && !Failed.Value ? "Success" : "");
             }
         }
 
