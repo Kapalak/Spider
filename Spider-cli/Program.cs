@@ -57,10 +57,10 @@
                 if (fluentParser.Object.TestsLocation != null)
                 {
                     var testfiles = Directory.GetFiles(fluentParser.Object.TestsLocation, "*.json", SearchOption.TopDirectoryOnly);
-                    foreach(var testfile in testfiles)
+                    foreach (var testfile in testfiles)
                     {
                         tests.Add(Path.Combine(fluentParser.Object.TestsLocation, testfile));
-                    }                   
+                    }
                 }
 
                 if (tests.Count > 0)
@@ -92,6 +92,14 @@
 
                         WriteTestResults(testExecutions);
                         ReportingHelper.GenerateHtmlReport(fluentParser.Object);
+                        if (testExecutions.Where(t => t.Failed.HasValue && t.Failed.Value).Count() > 0)
+                        {
+                            Environment.Exit(exitCode: 19);
+                        }
+                        else
+                        {
+                            Environment.Exit(exitCode: 0);
+                        }
                     }
                 }
                 else
@@ -99,7 +107,7 @@
                     _log_.Error("Spider-cli: ");
                     _log_.Error(result.ErrorText);
                     _log_.Error("Try `Spider-cli.exe --help' for more information.");
-                    return;
+                    Environment.Exit(exitCode: 21);
                 }
             }
         }
@@ -152,7 +160,7 @@
 
             fluentParser.Setup(arg => arg.ReportTemplate)
                 .As('r', "report-template")
-                .WithDescription("\nDefine the report template");            
+                .WithDescription("\nDefine the report template");
 
             fluentParser.Setup(arg => arg.ContextDirectoryLocation)
                 .As('c', "contexts-directory")
