@@ -94,6 +94,7 @@
                         ReportingHelper.GenerateHtmlReport(fluentParser.Object);
                         if (testExecutions.Where(t => t.Failed.HasValue && t.Failed.Value).Count() > 0)
                         {
+                            _log_.Error($"{testExecutions.Where(t => t.Failed.HasValue && t.Failed.Value).Count()} / {testExecutions.Count()} failed tests");
                             Environment.Exit(exitCode: 19);
                         }
                         else
