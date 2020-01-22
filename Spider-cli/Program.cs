@@ -42,6 +42,8 @@
 
             if (result.HasErrors == false)
             {
+                List<string> tests = new List<string>();
+
                 for (int index = 0; index < LogManager.Configuration.LoggingRules.Count; index++)
                 {
                     LogManager.Configuration.LoggingRules[index].SetLoggingLevels(fluentParser.Object.LogLevel, LogLevel.Fatal);
@@ -49,8 +51,20 @@
 
                 if (fluentParser.Object.Tests != null)
                 {
-                    var tests = fluentParser.Object.Tests;
+                    tests.AddRange(fluentParser.Object.Tests);
+                }
 
+                if (fluentParser.Object.TestsLocation != null)
+                {
+                    var testfiles = Directory.GetFiles(fluentParser.Object.TestsLocation, "*.json", SearchOption.TopDirectoryOnly);
+                    foreach(var testfile in testfiles)
+                    {
+                        tests.Add(Path.Combine(fluentParser.Object.TestsLocation, testfile));
+                    }                   
+                }
+
+                if (tests.Count > 0)
+                {
                     if (fluentParser.Object.ParallelScope == ParallelScope.None)
                     {
                         _log_.Info("Executing tests in series");
