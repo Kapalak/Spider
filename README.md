@@ -1,6 +1,6 @@
 # Spider
 Web Test Runner
-
+![](https://github.com/Kapalak/Spider/blob/master/Spider.Documentation/Images/spider-cli-solution.png?raw=true)
 
 
 ## Spider WebTest CLI
