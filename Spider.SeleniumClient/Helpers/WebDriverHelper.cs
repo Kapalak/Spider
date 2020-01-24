@@ -4,7 +4,9 @@
     using OpenQA.Selenium;
     using OpenQA.Selenium.Chrome;
     using OpenQA.Selenium.Firefox;
+    using OpenQA.Selenium.Interactions;
     using OpenQA.Selenium.Remote;
+    using OpenQA.Selenium.Support.UI;
     using Spider.Common.Enums;
     using Spider.Common.Helper;
     using Spider.Common.Model;
@@ -167,6 +169,17 @@
             }
 
             return element;
+        }
+
+        //Menu XPath is the XPath of menu for which you have to perform a hover operation
+        public static void MouseHover(this IWebDriver webDriver, Selector selector, int waitBefore = 10, int hoverWait = 4000)
+        {
+            WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(waitBefore));
+            var element = webDriver.UniqueElement(selector);
+            Actions action = new Actions(webDriver);
+            action.MoveToElement(element).Perform();
+            //Waiting for the menu to be displayed    
+            System.Threading.Thread.Sleep(hoverWait);
         }
 
         public static async Task EnsureDriverAsync(ExecutionEnvironment executionEnvironment)

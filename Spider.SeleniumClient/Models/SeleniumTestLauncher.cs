@@ -99,6 +99,9 @@
                     case (StepType.SET_TEXT):
                         webDriver.SetText(step.Selector, step.Value);
                         break;
+                    case (StepType.MOUSE_HOVER):
+                        webDriver.MouseHover(step.Selector);
+                        break;
                     case (StepType.ASSERT_TEXT):
                         webDriver.AssertTextEqual(step.Selector, step.Value);
                         break;

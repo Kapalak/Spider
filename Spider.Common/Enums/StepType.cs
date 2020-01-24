@@ -23,46 +23,52 @@
         CLICK_BUTTON = 2,
 
         /// <summary>
+        /// Click.
+        /// </summary>
+        [Description("MOUSE_HOVER")]
+        MOUSE_HOVER = 3,
+
+        /// <summary>
         /// SET_TEXT.
         /// </summary>
         [Description("SET_TEXT")]
-        SET_TEXT = 3,
+        SET_TEXT = 4,
 
         /// <summary>
         /// ASSERT TEXT.
         /// </summary>
         [Description("ASSERT_TEXT")]
-        ASSERT_TEXT = 4,
+        ASSERT_TEXT = 11,
 
         /// <summary>
         /// ASSERT Element exists.
         /// </summary>
         [Description("ASSERT_EXISTS")]
-        ASSERT_EXISTS = 5,
+        ASSERT_EXISTS = 12,
 
         /// <summary>
         /// Takescreenshot.
         /// </summary>
         [Description("TAKE_SCREENSHOT")]
-        TAKE_SCREENSHOT = 12,
+        TAKE_SCREENSHOT = 21,
 
 
         /// <summary>
         /// Takescreenshot.
         /// </summary>
         [Description("RESIZE_WINDOW")]
-        RESIZE_WINDOW = 13,
+        RESIZE_WINDOW = 31,
 
         /// <summary>
         /// EXECUTE_SCENARIO.
         /// </summary>
         [Description("EXECUTE_SCENARIO")]
-        EXECUTE_SCENARIO = 14,
+        EXECUTE_SCENARIO = 51,
 
         /// <summary>
         /// Takescreenshot.
         /// </summary>
         [Description("EXECUTE_JAVASCRIPT")]
-        EXECUTE_JAVASCRIPT = 15,
+        EXECUTE_JAVASCRIPT = 61,
     }
 }
