@@ -1,4 +1,6 @@
 # Spider
+![.NET Core](https://github.com/Kapalak/Spider/workflows/.NET%20Core/badge.svg)
+
 Web Test Runner
 ![](https://github.com/Kapalak/Spider/blob/master/Spider.Documentation/Images/spider-cli-solution.png?raw=true)
 
