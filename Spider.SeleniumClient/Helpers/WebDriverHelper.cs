@@ -148,6 +148,7 @@
 
                     element = webElements.FirstOrDefault();
                     System.Threading.Thread.Sleep(RetrySleepInterval);
+                    _log_.Trace($"Fetching element {selector.SelectorType.ToString()} {selector.Text} - Retry {retry}/{FetchRetries}");
                 }
                 catch (Exception ex)
                 {
