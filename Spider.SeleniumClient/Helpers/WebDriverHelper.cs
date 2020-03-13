@@ -57,13 +57,14 @@
 
         public static void ResizeWindow(this IWebDriver webDriver, Size? windowSize)
         {
-            _log_.Trace($"Resize Window {windowSize.Value} ");
             if (windowSize != null)
             {
+                _log_.Trace($"Resize Window {windowSize.Value} ");
                 webDriver.Manage().Window.Size = windowSize.Value;
             }
             else
             {
+                _log_.Trace($"Resize Window full screen ");
                 webDriver.Manage().Window.Maximize();
             }
         }

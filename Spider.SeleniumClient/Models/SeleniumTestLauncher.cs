@@ -83,14 +83,17 @@
                 switch (step.Type)
                 {
                     case (StepType.CREATE_SESSION):
-                        webDriver = WebDriverHelper.CreateSession(executionEnvironment);
-                        var sessionId = ((OpenQA.Selenium.Remote.RemoteWebDriver)webDriver).SessionId;
-                        webDriver.ResizeWindow(SeleniumConfig.BrowserSize);
-                        _log_.Trace($"Session created : {sessionId.ToString()}");
-                        step.SessionId = sessionId.ToString();
-                        break;
+                        {
+                            webDriver = WebDriverHelper.CreateSession(executionEnvironment);
+                            var sessionId = ((OpenQA.Selenium.Remote.RemoteWebDriver)webDriver).SessionId;
+                            var windowSize = ConvertStringToSize(step.Param);
+                            webDriver.ResizeWindow(windowSize);
+                            _log_.Trace($"Session created : {sessionId.ToString()}");
+                            step.SessionId = sessionId.ToString();
+                            break;
+                        }
                     case (StepType.NAVIGATE_URL):
-                        var url = UrlHelper.Combine(webDriver.Url, step.Param);                        
+                        var url = UrlHelper.Combine(webDriver.Url, step.Param);
                         webDriver.Navigate().GoToUrl(url);
                         break;
                     case (StepType.CLICK_BUTTON):
@@ -109,8 +112,11 @@
                         webDriver.TakeScreenshot(step.Value, Path.Combine(executionEnvironment.OutputDirectoryLocation));
                         break;
                     case (StepType.RESIZE_WINDOW):
-                        webDriver.ResizeWindow(SeleniumConfig.BrowserSize);
-                        break;
+                        {
+                            var windowSize = ConvertStringToSize(step.Param);
+                            webDriver.ResizeWindow(windowSize);
+                            break;
+                        }
                     case (StepType.EXECUTE_JAVASCRIPT):
                         var result = webDriver.ExecuteJavaScript<string>(step.Param);
                         if (result != step.Value)
@@ -153,6 +159,16 @@
             var outputFile = Path.Combine(executionEnvironment.OutputDirectoryLocation, sessionId, test.FileName.Replace(".json", "-result.json"));
             TestBookHelper.SaveTestToJson(test, outputFile);
             return test;
+        }
+
+        private static System.Drawing.Size? ConvertStringToSize(string size)
+        {
+            int width = 0;
+            int heigth = 0;
+            var parseSucceded = int.TryParse(size.Contains("*") ? size.Split('*')[0] : string.Empty, out width);
+            parseSucceded = parseSucceded && int.TryParse(size != null && size.Contains("*") ? size.Split('*')[1] : string.Empty, out heigth);
+            var windowsSize = (parseSucceded) ? new System.Drawing.Size(width, heigth) : (System.Drawing.Size?)null;
+            return windowsSize;
         }
     }
 }
